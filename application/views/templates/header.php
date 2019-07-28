@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Expert System Drone Chooser</title>
+    <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

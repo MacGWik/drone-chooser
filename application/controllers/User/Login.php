@@ -6,7 +6,7 @@ class Login extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('adminmodel');		
+		$this->load->model('usermodel');		
 	}
 
 	public function index()
@@ -17,17 +17,17 @@ class Login extends MY_Controller {
 		}
 		else
 		{
-			$data['redirect_to'] = "admin/dashboard";
+			$data['redirect_to'] = "dashboard";
 		}
 		
-		$this->load->view('admin/login/index',$data);
+		$this->load->view('user/login/index',$data);
 	}
 
 	function ajaxRequest()
 	{
 		$post = $this->PopulatePost();
 		
-		$salt = $this->adminmodel->GetData($post['email']);
+		$salt = $this->usermodel->GetData($post['email']);
 
 		if($salt == false)
 		{
@@ -36,7 +36,7 @@ class Login extends MY_Controller {
 		else
 		{
 			$password = md5($post['password']);
-			$dataLogin = $this->adminmodel->GetLoginInfo($post['email'],$password);
+			$dataLogin = $this->usermodel->GetLoginInfo($post['email'],$password);
 			
 			if($dataLogin == false)
 			{
@@ -46,7 +46,7 @@ class Login extends MY_Controller {
 			{
 				$this->session->set_userdata('name',$dataLogin->name);
 				$this->session->set_userdata('id',$dataLogin->id);
-				$this->session->set_userdata('class','admin');
+				$this->session->set_userdata('class','user');
 
 				echo json_encode(array('status'=>'success','message'=>'Selamat Datang '.$dataLogin->name.' !'));
 			}

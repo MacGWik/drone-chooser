@@ -24,9 +24,21 @@ class MY_Controller extends CI_Controller
 	       	if($return){
 	        	redirect('admin/login/?return='.urlencode($return));  
 	        }else{
-	        	redirect('admin/login/?return='.urlencode('dashboard/index'));
+	        	redirect('admin/login/?return='.urlencode('admin/dashboard/index'));
 	        }
       	}
+    }
+
+    function checkLoginUser($return)
+    {
+      if($this->session->userdata('id') == "")
+      {
+          if($return){
+            redirect('user/login/?return='.urlencode($return));  
+          }else{
+            redirect('user/login/?return='.urlencode('user/dashboard/index'));
+          }
+        }
     }
 
     public function terbilangBilanganIndonesia($bilangan) {

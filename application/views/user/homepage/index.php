@@ -40,34 +40,22 @@
 
 <body>
 
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row" style="padding-top: 10%;">
             <div class="col-md-4 col-md-offset-4" style="text-align: center;">
                 <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone</h3>
             </div>
+            <div class="col-md-4"></div>
         </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default" style="margin-top: 10%;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Silahkan Login Admin</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Email" name="email" id="email" type="text" autofocus>
-                                    <input type="hidden" value="<?= $redirect_to ?>" id="redirect_to">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <input type="button" class="btn btn-lg btn-success btn-block" value="Login" id="btnLogin">
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
+        <div class="row" style="padding-top: 15%;">
+            <div class="col-md-2 col-md-offset-3" style="padding-top:10px;">
+                <a href="<?= base_url(); ?>#" class="btn btn-primary btn-lg btn-block">Rakit Drone</a>
+            </div>
+            <div class="col-md-2 " style="padding-top:10px;">
+                <a href="<?= base_url(); ?>user/register" class="btn btn-primary btn-lg btn-block">Daftar Akun</a>
+            </div>
+            <div class="col-md-2 " style="padding-top:10px;">
+                <a href="<?= base_url(); ?>user/login" class="btn btn-primary btn-lg btn-block">Login Akun</a>
             </div>
         </div>
     </div>

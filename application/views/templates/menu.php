@@ -11,7 +11,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?= base_url() ?>barang">Admin Expert System Drone Chooser</a>
+                <?php if($this->session->userdata('class') == 'admin'){ ?>
+                <a class="navbar-brand" href="<?= base_url() ?>admin/dashboard">Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</a>
+                <?php } ?>
             </div>
             <!-- /.navbar-header -->
 
@@ -35,6 +37,9 @@
                     <ul class="nav" id="side-menu">
                         <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
+                            <a href="<?= base_url() ?>admin/dashboard"><i class="fa fa-list fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> Battery Size</a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -46,8 +51,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php } ?>
-                        <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> FPV Camera Size</a>
                             <ul class="nav nav-second-level">
@@ -60,8 +63,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php } ?>
-                        <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> ESC Software</a>
                             <ul class="nav nav-second-level">
@@ -74,8 +75,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php } ?>
-                        <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> FC Software</a>
                             <ul class="nav nav-second-level">
@@ -88,8 +87,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php } ?>
-                        <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> Motor KV</a>
                             <ul class="nav nav-second-level">
@@ -102,8 +99,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php } ?>
-                        <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> Motor Size</a>
                             <ul class="nav nav-second-level">

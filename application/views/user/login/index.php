@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</title>
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
      <!-- Bootstrap Core CSS -->
     <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default" style="margin-top: 10%;">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Silahkan Login Admin</h3>
+                        <h3 class="panel-title">Silahkan Login User</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form">
@@ -102,7 +102,7 @@
             if(emailInput == "" || passwordInput == ""){
                 $.displayError("Harap Masukkan Email dan Password Secara Benar !");
             }else{
-                $.post("<?php echo site_url('admin/login/ajaxrequest'); ?>",
+                $.post("<?php echo site_url('user/login/ajaxrequest'); ?>",
                 { 
                     email:emailInput,
                     password:passwordInput
