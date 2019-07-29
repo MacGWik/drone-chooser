@@ -26,7 +26,11 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                        if($c == "updated_at") 
+                        if($c == "name")
+                        {
+                            $row[] = $aRow[$c]."KV";
+                        }
+                        elseif($c == "updated_at") 
                         {
                             $row[] = $aRow[$c];
                             $edit = '<a href="'.base_url().'admin/motorkv/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
@@ -240,7 +244,11 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                        if($c == "updated_at") 
+                        if($c == "name")
+                        {
+                            $row[] = $aRow[$c]." Inch";
+                        }
+                        elseif($c == "updated_at") 
                         {
                             $row[] = $aRow[$c];
                             $edit = '<a href="'.base_url().'admin/propsize/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
@@ -275,7 +283,11 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                        if($c == "updated_at") 
+                        if($c == "name")
+                        {
+                            $row[] = $aRow[$c]." Degree";
+                        }
+                        elseif($c == "updated_at") 
                         {
                             $row[] = $aRow[$c];
                             $edit = '<a href="'.base_url().'admin/proppitch/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';

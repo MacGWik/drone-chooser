@@ -10,9 +10,16 @@
             <form role="form" method="post" action="<?= base_url() ?>admin/propsize/edit/<?= $datapropsize->id ?>" enctype="multipart/form-data">
                 <div class="row" id="itemContainer">
                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Prop Size</label>
-                            <input class="form-control" type="text" name="name" value="<?= $datapropsize->name ?>" required="">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Prop Size</label>
+                                    <input class="form-control" type="text" name="name" value="<?= $datapropsize->name ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top: 28px;">
+                                <label>Inch</label>
+                            </div>
                         </div>
                     </div>
                 </div>
