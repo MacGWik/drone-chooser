@@ -17,8 +17,8 @@
                                     <input class="form-control" type="text" name="name" value="<?= $dataproppitch->name ?>" required="">
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="padding-top: 28px;">
-                                <label>Degree</label>
+                            <div class="col-lg-4" >
+                                <label class="note-label">Degree</label>
                             </div>
                         </div>
                     </div>

@@ -17,8 +17,8 @@
                                     <input class="form-control" type="text" name="name" value="<?= $databatterysize->name ?>" required="" >
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="padding-top: 28px;">
-                                <label>S (Battery Cell Count)</label>
+                            <div class="col-lg-4" >
+                                <label class="note-label">S (Battery Cell Count)</label>
                             </div>
                         </div>
                     </div>

@@ -16,9 +16,16 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Power Output</label>
-                            <input class="form-control" type="text" name="power_output" value="<?= $datavtx->power_output ?>" required="">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Power Output</label>
+                                    <input class="form-control" type="text" name="power_output" value="<?= $datavtx->power_output ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4" >
+                                <label class="note-label">MW</label>
+                            </div>
                         </div>
                     </div>
                 </div>

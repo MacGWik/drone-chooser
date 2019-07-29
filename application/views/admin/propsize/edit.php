@@ -17,8 +17,8 @@
                                     <input class="form-control" type="text" name="name" value="<?= $datapropsize->name ?>" required="">
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="padding-top: 28px;">
-                                <label>Inch</label>
+                            <div class="col-lg-4" >
+                                <label class="note-label">Inch</label>
                             </div>
                         </div>
                     </div>

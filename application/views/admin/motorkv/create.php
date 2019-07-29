@@ -17,8 +17,8 @@
                                     <input class="form-control" type="text" name="name" required="">
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="padding-top: 28px;">
-                                <label>KV</label>
+                            <div class="col-lg-4" >
+                                <label class="note-label">KV</label>
                             </div>
                         </div>
                     </div>

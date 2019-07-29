@@ -449,6 +449,97 @@ class Datasource extends MY_Controller {
         echo json_encode($output);
     }
 
+    // get data esc list
+    function esc()
+    { 
+        $aColumns = array('a.id','a.name','a.ampere_rating','b.name as esc_software','c.name as lowest_battery_rating','d.name as highest_battery_rating','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "escs a 
+                    LEFT JOIN esc_softwares b ON a.esc_software_id = b.id
+                    LEFT JOIN battery_sizes c ON a.start_battery_size_id = c.id
+                    LEFT JOIN battery_sizes d ON a.end_battery_size_id = d.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+                    if($c == "lowest_battery_rating" || $c == "highest_battery_rating")
+                    {
+                        $row[] = $aRow[$c]."S";
+                    }
+                    elseif($c == "ampere_rating")
+                    {
+                        $row[] = $aRow[$c]."A";
+                    }
+                    elseif($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/esc/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data prop list
+    function prop()
+    { 
+        $aColumns = array('a.id','a.name','b.name as prop_size','c.name as prop_pitch','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "props a 
+                    LEFT JOIN prop_sizes b ON a.prop_size_id = b.id
+                    LEFT JOIN prop_pitchs c ON a.prop_pitch_id = c.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+                    if($c == "prop_size")
+                    {
+                        $row[] = $aRow[$c]." Inch";
+                    }
+                    elseif($c == "prop_pitch")
+                    {
+                        $row[] = $aRow[$c]." Degree";
+                    }
+                    elseif($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/prop/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
     function tipe()
     { //print_r('expression');die();
         // $status_penggunaan = $this->barangmodel->staticVar('status_penggunaan');

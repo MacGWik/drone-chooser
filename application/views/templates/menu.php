@@ -88,6 +88,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> ESC</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/esc">List ESC</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/esc/create">Create ESC</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> FC Software</a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -124,6 +136,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Prop Size</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/propsize">List Prop Size</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/propsize/create">Create Prop Size</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> Prop Pitch</a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -136,13 +160,13 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list fa-fw"></i> Prop Size</a>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Prop</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url() ?>admin/propsize">List Prop Size</a>
+                                    <a href="<?= base_url() ?>admin/prop">List Prop</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url() ?>admin/propsize/create">Create Prop Size</a>
+                                    <a href="<?= base_url() ?>admin/prop/create">Create Prop</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
