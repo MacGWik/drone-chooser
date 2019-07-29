@@ -7,12 +7,19 @@
             </div>
             <!-- /.row -->
 
-            <form role="form" method="post" action="<?= base_url() ?>admin/batterysize/edit/<?= $dataBatterySize->id ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?= base_url() ?>admin/batterysize/edit/<?= $databatterysize->id ?>" enctype="multipart/form-data">
                 <div class="row" id="itemContainer">
                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Battery Size</label>
-                            <input class="form-control" type="text" name="name" value="<?= $dataBatterySize->name ?>" required="" >
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Battery Size</label>
+                                    <input class="form-control" type="text" name="name" value="<?= $databatterysize->name ?>" required="" >
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top: 28px;">
+                                <label>S (Battery Cell Count)</label>
+                            </div>
                         </div>
                     </div>
                 </div>

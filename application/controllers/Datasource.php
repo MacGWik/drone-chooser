@@ -96,7 +96,11 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                        if($c == "updated_at") 
+                        if($c == 'name')
+                        {
+                            $row[] = $aRow[$c]."S";
+                        }
+                        elseif($c == "updated_at") 
                         {
                             $row[] = $aRow[$c];
                             $edit = '<a href="'.base_url().'admin/batterysize/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
