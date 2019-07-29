@@ -219,6 +219,111 @@ class Datasource extends MY_Controller {
         echo json_encode($output);
     }
 
+    // get data Prop size list
+    function propsize()
+    { 
+        $aColumns = array('id','name','created_at','updated_at');
+        $sIndexColumn = 'id';
+        $sTable = "prop_sizes";
+        $add_where = "deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares'];// print_r($datares);DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                    $row = array();
+                    foreach($aColumns as $c)
+                    {
+                        if($c == "updated_at") 
+                        {
+                            $row[] = $aRow[$c];
+                            $edit = '<a href="'.base_url().'admin/propsize/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                        }
+                        else
+                        {
+                            $row[] = $aRow[$c];
+                        } 
+                    }
+                    $output['aaData'][] = $row;
+                // }
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data Prop pitch list
+    function proppitch()
+    { 
+        $aColumns = array('id','name','created_at','updated_at');
+        $sIndexColumn = 'id';
+        $sTable = "prop_pitchs";
+        $add_where = "deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares'];// print_r($datares);DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                    $row = array();
+                    foreach($aColumns as $c)
+                    {
+                        if($c == "updated_at") 
+                        {
+                            $row[] = $aRow[$c];
+                            $edit = '<a href="'.base_url().'admin/proppitch/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                        }
+                        else
+                        {
+                            $row[] = $aRow[$c];
+                        } 
+                    }
+                    $output['aaData'][] = $row;
+                // }
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data FC mount option list
+    function fcmountoption()
+    { 
+        $aColumns = array('id','name','created_at','updated_at');
+        $sIndexColumn = 'id';
+        $sTable = "fc_mount_options";
+        $add_where = "deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares'];// print_r($datares);DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                    $row = array();
+                    foreach($aColumns as $c)
+                    {
+                        if($c == "updated_at") 
+                        {
+                            $row[] = $aRow[$c];
+                            $edit = '<a href="'.base_url().'admin/fcmountoption/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                        }
+                        else
+                        {
+                            $row[] = $aRow[$c];
+                        } 
+                    }
+                    $output['aaData'][] = $row;
+                // }
+            }
+        }
+        echo json_encode($output);
+    }
+
     function tipe()
     { //print_r('expression');die();
         // $status_penggunaan = $this->barangmodel->staticVar('status_penggunaan');

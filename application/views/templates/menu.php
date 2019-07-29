@@ -111,6 +111,42 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Prop Pitch</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/proppitch">List Prop Pitch</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/proppitch/create">Create Prop Pitch</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Prop Size</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/propsize">List Prop Size</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/propsize/create">Create Prop Size</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> FC Mount Option</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/fcmountoption">List FC Mount Option</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/fcmountoption/create">Create FC Mount Option</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>

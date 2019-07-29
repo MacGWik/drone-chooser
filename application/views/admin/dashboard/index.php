@@ -3,18 +3,21 @@
                 <div class="col-lg-7" style="padding-right: 0px;">
                     <h1 class="page-header">Dashboard Admin</h1>
                 </div>
-                <div class="col-lg-5" style="padding-left: 0px; padding-top: 0px; text-align: right;">
+                <div class="col-lg-5" style="padding-left: 0px; padding-top: 0px; text-align: right;height: 10px;">
                     <h1 class="page-header" style="margin-top: 39px;">
-                        <a href="<?= base_url() ?>admin/batterysize/create" class="btn btn-primary">Selamat Datang <?= $this->session->userdata('name'); ?></a>
+                        <!-- <a href="<?= base_url() ?>admin/batterysize/create" class="btn btn-primary"></a> -->
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
-            <!-- <div class="row">
-                <span id="SpanTbl">
-				</span>
-            </div> -->
+            <div class="row">
+            	<div class="col-lg-7">
+		            <h3 style="margin-top: 0px;">Selamat Datang, <?= $this->session->userdata('name'); ?></h1>
+        		</div>
+                <!-- <span id="SpanTbl">
+				</span> -->
+            </div>
             <!-- /.row -->
         </div>
 
