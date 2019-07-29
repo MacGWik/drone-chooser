@@ -324,6 +324,115 @@ class Datasource extends MY_Controller {
         echo json_encode($output);
     }
 
+    // get data FC mount option list
+    function frametype()
+    { 
+        $aColumns = array('id','name','created_at','updated_at');
+        $sIndexColumn = 'id';
+        $sTable = "frame_types";
+        $add_where = "deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares'];// print_r($datares);DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                    $row = array();
+                    foreach($aColumns as $c)
+                    {
+                        if($c == "updated_at") 
+                        {
+                            $row[] = $aRow[$c];
+                            $edit = '<a href="'.base_url().'admin/frametype/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                        }
+                        else
+                        {
+                            $row[] = $aRow[$c];
+                        } 
+                    }
+                    $output['aaData'][] = $row;
+                // }
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data vtx list
+    function vtx()
+    { 
+        $aColumns = array('id','name','power_output','created_at','updated_at');
+        $sIndexColumn = 'id';
+        $sTable = "vtxs";
+        $add_where = "deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares'];// print_r($datares);DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                    $row = array();
+                    foreach($aColumns as $c)
+                    {
+                        if($c == "updated_at") 
+                        {
+                            $row[] = $aRow[$c];
+                            $edit = '<a href="'.base_url().'admin/vtx/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                        }
+                        else
+                        {
+                            $row[] = $aRow[$c];
+                        } 
+                    }
+                    $output['aaData'][] = $row;
+                // }
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data fpv cam list
+    function fpvcam()
+    { 
+        $aColumns = array('a.id','a.name','cam_size_id','b.name as cam_size_name','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "fpv_cams a LEFT JOIN cam_sizes b ON a.cam_size_id = b.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+                    if($c == "cam_size_id")
+                    {
+                        // do nothing
+                    }
+                    elseif($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/fpvcam/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
     function tipe()
     { //print_r('expression');die();
         // $status_penggunaan = $this->barangmodel->staticVar('status_penggunaan');

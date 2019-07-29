@@ -64,6 +64,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> FPV Camera</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/fpvcam">List FPV Camera</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/fpvcam/create">Create FPV Camera</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> ESC Software</a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -143,6 +155,30 @@
                                 </li>
                                 <li>
                                     <a href="<?= base_url() ?>admin/fcmountoption/create">Create FC Mount Option</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Frame Type</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/frametype">List Frame Type</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/frametype/create">Create Frame Type</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> VTX</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/vtx">List VTX</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/vtx/create">Create VTX</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

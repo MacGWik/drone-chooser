@@ -14,6 +14,9 @@
     <!-- Custom JavaScript -->
     <script src="<?= base_url(); ?>assets/dist/js/lib.js"></script>
 
+    <!-- Select2 JavaScript -->
+    <script src="<?= base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
+
     <div id="errorPanel">
       <div id="errorOverlay">
         <!-- <i class="fa fa-exclamation-triangle"></i> <span>Data Error!</span> -->
@@ -72,6 +75,14 @@
 
       </div>
     </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.select2').select2({
+          placeholder: "Select a Data"
+        });
+      })
+    </script>
 </body>
 
 </html>
