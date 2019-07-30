@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2019 at 01:33 PM
+-- Generation Time: Jul 30, 2019 at 02:04 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -275,6 +275,7 @@ CREATE TABLE `frames` (
   `size` int(11) NOT NULL,
   `weight` int(11) NOT NULL,
   `purpouse` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `battery_mount` int(1) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -369,7 +370,7 @@ CREATE TABLE `motors` (
 
 INSERT INTO `motors` (`id`, `motor_size_id`, `motor_kv_id`, `battery_size_id`, `prop_size_id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, 1, 1, 'Emax Eco 2207-2400kv', NULL, '2019-07-30 06:23:13', '2019-07-30 06:23:13'),
-(2, 2, 2, 1, 1, 'Emax Eco 2207-2600kv', NULL, '2019-07-30 06:32:35', '2019-07-30 06:32:35');
+(2, 2, 2, 1, 1, 'Emax Eco 2207-2600kv', NULL, '2019-07-30 06:32:35', '2019-07-30 06:34:44');
 
 -- --------------------------------------------------------
 
