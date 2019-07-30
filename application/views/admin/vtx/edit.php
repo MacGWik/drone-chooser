@@ -20,11 +20,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Power Output</label>
-                                    <input class="form-control" type="text" name="power_output" value="<?= $datavtx->power_output ?>" required="">
+                                    <div class="input-group"> 
+                                        <input class="form-control" type="text" name="power_output" value="<?= $datavtx->power_output ?>" required="">
+                                        <span class="input-group-addon" id="basic-addon1">mW</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">MW</label>
                             </div>
                         </div>
                     </div>
