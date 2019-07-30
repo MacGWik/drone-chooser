@@ -540,6 +540,97 @@ class Datasource extends MY_Controller {
         echo json_encode($output);
     }
 
+    // get data fc list
+    function fc()
+    { 
+        $aColumns = array('a.id','a.name','b.name as fc_software','c.name as esc_software','d.name as fc_mount_option','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "fcs a 
+                    LEFT JOIN fc_softwares b ON a.fc_software_id = b.id
+                    LEFT JOIN esc_softwares c ON a.esc_software_id = c.id
+                    LEFT JOIN fc_mount_options d ON a.fc_mount_option_id = d.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+
+                    if($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/fc/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data motor list
+    function motor()
+    { 
+        $aColumns = array('a.id','a.name','b.name as motor_size','c.name as motor_kv','d.name as prop_size','e.name as battery_size','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "motors a 
+                    LEFT JOIN motor_sizes b ON a.motor_size_id = b.id
+                    LEFT JOIN motor_kvs c ON a.motor_kv_id = c.id
+                    LEFT JOIN prop_sizes d ON a.prop_size_id = d.id
+                    LEFT JOIN battery_sizes e ON a.battery_size_id = e.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+
+                    if($c == "motor_kv")
+                    {
+                        $row[] = $aRow[$c]."KV";
+                    }
+                    elseif($c == "battery_size")
+                    {
+                        $row[] = $aRow[$c]."S";
+                    }
+                    elseif($c == "prop_size")
+                    {
+                        $row[] = $aRow[$c]." Inch";
+                    }
+                    elseif($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/motor/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
     function tipe()
     { //print_r('expression');die();
         // $status_penggunaan = $this->barangmodel->staticVar('status_penggunaan');

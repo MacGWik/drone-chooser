@@ -45,9 +45,9 @@
 			"aoColumns": [
 	            { "sWidth": "5%"},
 	            { "sWidth": "20%" },
-	            { "sWidth": "10%" },
-	            { "sWidth": "10%"},
-	            { "sWidth": "5%" },
+	            { "sWidth": "6%" },
+	            { "sWidth": "6%"},
+	            { "sWidth": "6%" },
 	        ],
     		"aaSorting": [[ 1, "desc" ]],
 	        "bProcessing": true,

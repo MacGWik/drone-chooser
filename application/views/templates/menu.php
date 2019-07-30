@@ -112,25 +112,25 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list fa-fw"></i> Motor KV</a>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> FC Mount Option</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url() ?>admin/motorkv">List Motor KV</a>
+                                    <a href="<?= base_url() ?>admin/fcmountoption">List FC Mount Option</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url() ?>admin/motorkv/create">Create Motor KV</a>
+                                    <a href="<?= base_url() ?>admin/fcmountoption/create">Create FC Mount Option</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list fa-fw"></i> Motor Size</a>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> FC</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url() ?>admin/motorsize">List Motor Size</a>
+                                    <a href="<?= base_url() ?>admin/fc">List FC</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url() ?>admin/motorsize/create">Create Motor Size</a>
+                                    <a href="<?= base_url() ?>admin/fc/create">Create FC</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -172,13 +172,37 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list fa-fw"></i> FC Mount Option</a>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Motor KV</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url() ?>admin/fcmountoption">List FC Mount Option</a>
+                                    <a href="<?= base_url() ?>admin/motorkv">List Motor KV</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url() ?>admin/fcmountoption/create">Create FC Mount Option</a>
+                                    <a href="<?= base_url() ?>admin/motorkv/create">Create Motor KV</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Motor Size</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/motorsize">List Motor Size</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/motorsize/create">Create Motor Size</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Motor</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/motor">List Motor</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/motor/create">Create Motor</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

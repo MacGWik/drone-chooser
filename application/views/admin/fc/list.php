@@ -1,11 +1,11 @@
 		<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-7" style="padding-right: 0px;">
-                    <h1 class="page-header">Motor Size</h1>
+                    <h1 class="page-header">FC</h1>
                 </div>
                 <div class="col-lg-5" style="padding-left: 0px; padding-top: 0px; text-align: right;">
                     <h1 class="page-header" style="margin-top: 39px;">
-                        <a href="<?= base_url() ?>admin/motorsize/create" class="btn btn-primary">Create Motor Size</a>
+                        <a href="<?= base_url() ?>admin/fc/create" class="btn btn-primary">Create FC</a>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -30,7 +30,10 @@
 			.append($("<thead></thead>")
 			.append($("<tr></tr>")
 			.append($("<th ></th>").append("ID"))
-			.append($("<th ></th>").append("Motor Size"))
+			.append($("<th ></th>").append("Name"))
+			.append($("<th ></th>").append("FC Software"))
+			.append($("<th ></th>").append("ESC Software"))
+			.append($("<th ></th>").append("Mount Option"))
 			.append($("<th ></th>").append("Created At"))
 			.append($("<th ></th>").append("Updated At"))
 			.append($("<th ></th>").append("Action"))
@@ -44,7 +47,10 @@
 	    	// 'ajax': "data.json",
 			"aoColumns": [
 	            { "sWidth": "5%"},
-	            { "sWidth": "20%" },
+	            { "sWidth": "10%" },
+	            { "sWidth": "10%" },
+	            { "sWidth": "10%" },
+	            { "sWidth": "10%" },
 	            { "sWidth": "6%" },
 	            { "sWidth": "6%"},
 	            { "sWidth": "6%" },
@@ -52,7 +58,7 @@
     		"aaSorting": [[ 1, "desc" ]],
 	        "bProcessing": true,
 	        "bServerSide": true,
-	        "sAjaxSource": site_url+'datasource/motorsize',
+	        "sAjaxSource": site_url+'datasource/fc',
 	        "aoColumnDefs": [
 		        {
 		        	"bSortable":false, "aTargets":[]
@@ -72,7 +78,7 @@
 			var data = $(this).attr('data');
 			$.displayConfirm("Are you sure to delete this data?",function(){
 				// $(".loading").show();
-				$.post("<?php echo site_url('admin/motorsize/delete'); ?>",
+				$.post("<?php echo site_url('admin/fc/delete'); ?>",
 				{ 
 					id:data 
 				},
