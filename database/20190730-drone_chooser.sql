@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2019 at 01:19 PM
+-- Generation Time: Jul 30, 2019 at 01:33 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -126,6 +126,13 @@ CREATE TABLE `escs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `escs`
+--
+
+INSERT INTO `escs` (`id`, `esc_software_id`, `start_battery_size_id`, `end_battery_size_id`, `name`, `ampere_rating`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 'KISS ESC Race Editio', 24, NULL, '2019-07-30 06:26:18', '2019-07-30 06:26:18');
 
 -- --------------------------------------------------------
 
@@ -354,7 +361,15 @@ CREATE TABLE `motors` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `motors`
+--
+
+INSERT INTO `motors` (`id`, `motor_size_id`, `motor_kv_id`, `battery_size_id`, `prop_size_id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 1, 1, 'Emax Eco 2207-2400kv', NULL, '2019-07-30 06:23:13', '2019-07-30 06:23:13'),
+(2, 2, 2, 1, 1, 'Emax Eco 2207-2600kv', NULL, '2019-07-30 06:32:35', '2019-07-30 06:32:35');
 
 -- --------------------------------------------------------
 
@@ -449,6 +464,15 @@ CREATE TABLE `props` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `props`
+--
+
+INSERT INTO `props` (`id`, `prop_size_id`, `prop_pitch_id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Ethix S3', NULL, '2019-07-30 06:28:24', '2019-07-30 06:28:24'),
+(2, 1, 2, 'Dal Cyclone 5040', NULL, '2019-07-30 06:28:33', '2019-07-30 06:28:33'),
+(3, 1, 4, 'Dal Cyclone 5045', NULL, '2019-07-30 06:28:44', '2019-07-30 06:28:44');
 
 -- --------------------------------------------------------
 
@@ -643,10 +667,10 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `motors`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `motors_battery_size_id_foreign` (`battery_size_id`),
   ADD KEY `motors_motor_size_id_foreign` (`motor_size_id`),
   ADD KEY `motors_prop_size_id_foreign` (`prop_size_id`),
-  ADD KEY `motors_motor_kv_id_foreign` (`motor_kv_id`) USING BTREE;
+  ADD KEY `motors_motor_kv_id_foreign` (`motor_kv_id`) USING BTREE,
+  ADD KEY `motors_battery_size_id_foreign` (`battery_size_id`) USING BTREE;
 
 --
 -- Indexes for table `motor_kvs`
@@ -737,7 +761,7 @@ ALTER TABLE `cam_sizes`
 -- AUTO_INCREMENT for table `escs`
 --
 ALTER TABLE `escs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `esc_softwares`
 --
@@ -782,7 +806,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `motors`
 --
 ALTER TABLE `motors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `motor_kvs`
 --
@@ -802,7 +826,7 @@ ALTER TABLE `motor_varians`
 -- AUTO_INCREMENT for table `props`
 --
 ALTER TABLE `props`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `prop_pitchs`
 --
