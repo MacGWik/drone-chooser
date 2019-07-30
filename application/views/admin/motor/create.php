@@ -67,5 +67,24 @@
                         </div>
                     </div>    
                 </div>
+                <!-- <div class="row">
+                    <div class="col-lg-12">
+                            <h3 style="float:left;">Ampere Pulling By Motor</h3>
+                            <button type="button" id="addAmperePull">Add Ampere Data</button>
+                    </div>
+                </div> -->
+                <div class="row" id="ampereContainer" style="border:1px solid black;padding-top: 10px; margin-top:10px;">
+                    <div class="col-lg-12" style="margin-bottom: 15px;">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
