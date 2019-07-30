@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2019 at 02:04 PM
+-- Generation Time: Jul 30, 2019 at 02:11 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -280,6 +280,13 @@ CREATE TABLE `frames` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `frames`
+--
+
+INSERT INTO `frames` (`id`, `prop_size_id`, `motor_size_id`, `fc_mount_option_id`, `cam_size_id`, `frame_type_id`, `name`, `size`, `weight`, `purpouse`, `battery_mount`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1, 1, 1, 'Alien 225mm', 225, 95, '2', 1, NULL, '2019-07-30 07:10:57', '2019-07-30 07:10:57');
 
 -- --------------------------------------------------------
 
@@ -792,7 +799,7 @@ ALTER TABLE `fpv_cams`
 -- AUTO_INCREMENT for table `frames`
 --
 ALTER TABLE `frames`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `frame_types`
 --

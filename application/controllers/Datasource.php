@@ -6,7 +6,7 @@ class Datasource extends MY_Controller {
     function __construct()
     {
         parent::__construct();
-        // $this->load->model('barangmodel');
+        $this->load->model('framemodel');
     }
 
     // get data motor kv list
@@ -608,6 +608,55 @@ class Datasource extends MY_Controller {
                     elseif($c == "battery_size")
                     {
                         $row[] = $aRow[$c]."S";
+                    }
+                    elseif($c == "prop_size")
+                    {
+                        $row[] = $aRow[$c]." Inch";
+                    }
+                    elseif($c == "updated_at") 
+                    {
+                        $row[] = $aRow[$c];
+                        $edit = '<a href="'.base_url().'admin/motor/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                    }
+                    else
+                    {
+                        $row[] = $aRow[$c];
+                    } 
+                }
+                $output['aaData'][] = $row;
+                
+            }
+        }
+        echo json_encode($output);
+    }
+
+    // get data frame list
+    function frame()
+    { 
+        $purpouse = $this->framemodel->staticVar('purpouse');
+
+        $aColumns = array('a.id','a.name','a.purpouse','b.name as motor_size','c.name as prop_size','d.name as frame_type','a.created_at','a.updated_at');
+        $sIndexColumn = 'a.id';
+        $sTable = "frames a 
+                    LEFT JOIN motor_sizes b ON a.motor_size_id = b.id
+                    LEFT JOIN prop_sizes c ON a.prop_size_id = c.id
+                    LEFT JOIN frame_types d ON a.frame_type_id = d.id";
+        $add_where = "a.deleted_at IS NULL";
+        $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
+        $output = $data['output'];
+        $datares = $data['datares']; //print_r($datares->result_array());DIE();
+        if(!empty($datares))
+        {
+            foreach($datares->result_array() as $aRow)
+            {
+                $row = array();
+                
+                foreach ($aRow as $c => $value) {
+
+                    if($c == "purpouse")
+                    {
+                        $row[] = $purpouse[$aRow[$c]];
                     }
                     elseif($c == "prop_size")
                     {
