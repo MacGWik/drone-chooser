@@ -60,7 +60,7 @@ class Frame extends MY_Controller {
 		$this->checkLogin('admin/frame/edit/'.$id);
 		if($this->session->userdata('class') == 'admin')
 		{
-			$data['datamotor'] = $this->framemodel->GetDataByID($id);
+			$data['dataframe'] = $this->framemodel->GetDataByID($id);
 			
 			$post = $this->PopulatePost();
 			if(isset($post['submit'])){
@@ -68,6 +68,9 @@ class Frame extends MY_Controller {
 				$this->framemodel->Update($post);
 				redirect('admin/frame');
 			}
+			$data['datapurpouse'] = $this->framemodel->staticVar('purpouse');
+			$data['databatterymount'] = $this->framemodel->staticVar('batterymount');
+			
 			$data['datamotorsize'] = $this->motorsizemodel->GetAllData();
 			$data['datapropsize'] = $this->propsizemodel->GetAllData();
 			$data['datafcmountoption'] = $this->fcmountoptionmodel->GetAllData();

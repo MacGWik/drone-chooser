@@ -665,7 +665,7 @@ class Datasource extends MY_Controller {
                     elseif($c == "updated_at") 
                     {
                         $row[] = $aRow[$c];
-                        $edit = '<a href="'.base_url().'admin/motor/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
+                        $edit = '<a href="'.base_url().'admin/frame/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
                         $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
                     }
                     else
