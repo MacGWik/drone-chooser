@@ -12,6 +12,7 @@ class Motor extends MY_Controller {
 		$this->load->model('propsizemodel');
 		$this->load->model('proppitchmodel');
 		$this->load->model('batterysizemodel');
+		$this->load->model('amperemotormodel');
 	}
 
 	public function index()
@@ -36,7 +37,17 @@ class Motor extends MY_Controller {
 
 			$post = $this->PopulatePost();
 			if(isset($post['submit'])){
-				$this->motormodel->Insert($post);
+				$data = array();
+
+				$data['motor_id'] = $this->motormodel->Insert($post);
+
+				foreach ($post['prop_pitch_id'] as $key => $value) {
+					$data['prop_pitch_id'] = $value;
+					$data['ampere'] = $post['ampere'][$key];
+
+					$this->amperemotormodel->insert($data);
+				}
+
 				redirect('admin/motor');
 			}
 			$data['dataproppitch'] = $this->proppitchmodel->GetAllData();
@@ -63,8 +74,27 @@ class Motor extends MY_Controller {
 			if(isset($post['submit'])){
 				$post['id'] = $id;
 				$this->motormodel->Update($post);
+
+				// reset data ampere
+				$this->amperemotormodel->delete($post['id']);
+
+				// re insert data
+				$data = array();
+
+				$data['motor_id'] = $post['id'];
+
+				foreach ($post['prop_pitch_id'] as $key => $value) {
+					$data['prop_pitch_id'] = $value;
+					$data['ampere'] = $post['ampere'][$key];
+
+					$this->amperemotormodel->insert($data);
+				}
+
 				redirect('admin/motor');
 			}
+			$data['dataamperemotor'] = $this->amperemotormodel->GetDataByMotorID($id);
+			
+			$data['dataproppitch'] = $this->proppitchmodel->GetAllData();
 			$data['datamotorsize'] = $this->motorsizemodel->GetAllData();
 			$data['datapropsize'] = $this->propsizemodel->GetAllData();
 			$data['datamotorkv'] = $this->motorkvmodel->GetAllData();

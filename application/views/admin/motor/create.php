@@ -69,40 +69,18 @@
                         </div>    
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-lg-12">
-                            <h3 style="float:left;">Ampere Pulling By Motor</h3>
-                            <button type="button" id="addAmperePull">Add Ampere Data</button>
-                    </div>
-                </div> -->
                 <div class="row" style="margin-top:15px;">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="col-lg-6">
-                                    Ampere Pulled By Motor    
-                                </div>
-                                 
-                                <div class="col-lg-6" style="text-align:right;">
-                                </div>
+                                <div class="panel-title">Ampere Pulled By Motor</div>    
                             </div>
-                            <div class="panel-body" id="ampereContainer">
-                                <button class="btn btn-success btnAdd">Add more</button>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        
-                                    </div>
-                                    <div class="form-group">
-                                        
-                                    </div>
-                                    <div class="form-group">
-                                        
-                                    </div>
-                                </div>
+                            <div class="panel-body">
+                                <button class="btn btn-success" type="button" id="btnAdd">Add more</button>
                             </div>
-                            <table class="table">
+                            <table class="table" id="ampere-pull-container">
                                 <tr>
-                                    <td>
+                                    <td style="width:613px;">
                                         <select class="form-control select2proppitch" type="text" name="prop_pitch_id[]" id="" required="">
                                             <option value=""></option>
                                             <?php foreach($dataproppitch as $key => $value){ ?>
@@ -112,12 +90,12 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Ampere Pulled">                                            
+                                            <input type="text" class="form-control ampere" name="ampere[]" placeholder="Ampere Pulled" required="">                                            
                                             <span class="input-group-addon" id="basic-addon1">A</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <button class="btn btn-danger">Remove</button>
+                                    <td style="width:129px;">
+                                        &nbsp;
                                     </td>
                                 </tr>
                             </table>
@@ -126,3 +104,40 @@
                 </div>
             </form>
         </div>
+
+<script>
+    var row = 1;
+    $('#btnAdd').click(function(){
+        row = row+1;
+        var addRow =    '<tr id="ampere-pull-'+row+'">'+
+                            '<td>'+
+                                '<select class="form-control select2proppitch" type="text" name="prop_pitch_id[]" id="" required="">'+
+                                    '<option value=""></option>'+
+                                    '<?php foreach($dataproppitch as $key => $value){ ?>'+
+                                        '<option value="<?= $value["id"] ?>"><?= $value["name"] ?> Degree</option>'+
+                                    '<?php } ?>'+
+                                '</select>'+
+                            '</td>'+
+                            '<td>'+
+                                '<div class="input-group">'+
+                                    '<input type="text" class="form-control ampere" name="ampere[]" placeholder="Ampere Pulled" required="">                                            '+
+                                    '<span class="input-group-addon" id="basic-addon1">A</span>'+
+                                '</div>'+
+                            '</td>'+
+                            '<td>'+
+                                '<button type="button" class="btn btn-danger btnRemove" data-row="'+row+'">Remove</button>'+
+                            '</td>'+
+                        '</tr>';
+        $('#ampere-pull-container').append(addRow);
+        $('.select2proppitch').select2({
+          placeholder: "Prop Pitch"
+        })
+    });
+
+    $("#ampere-pull-container").on('click', '.btnRemove', function(e){
+        var row = $(this).data('row');
+        $.displayConfirm('Are you sure want to remove the data ?',function(){
+            $('#ampere-pull-'+row).remove();
+        }) 
+    })
+</script>
