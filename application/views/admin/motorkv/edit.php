@@ -14,11 +14,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Motor KV</label>
-                                    <input class="form-control" type="text" name="name" value="<?= $dataMotorKV->name ?>" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="name" value="<?= $dataMotorKV->name ?>" required="">
+                                        <span class="input-group-addon" id="basic-addon1">S (Battery Cell Count)</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">KV</label>
                             </div>
                         </div>
                     </div>

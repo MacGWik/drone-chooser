@@ -60,12 +60,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-1">
-                            <button type="submit" class="btn btn-default" name="submit">Submit</button>
-                        </div>
-                    </div>    
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <button type="submit" class="btn btn-default" name="submit">Submit</button>
+                            </div>
+                        </div>    
+                    </div>
                 </div>
                 <!-- <div class="row">
                     <div class="col-lg-12">
@@ -73,16 +75,52 @@
                             <button type="button" id="addAmperePull">Add Ampere Data</button>
                     </div>
                 </div> -->
-                <div class="row" id="ampereContainer" style="border:1px solid black;padding-top: 10px; margin-top:10px;">
-                    <div class="col-lg-12" style="margin-bottom: 15px;">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="col-lg-6">
+                                    Ampere Pulled By Motor    
+                                </div>
+                                 
+                                <div class="col-lg-6" style="text-align:right;">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+                            <div class="panel-body" id="ampereContainer">
+                                <button class="btn btn-success btnAdd">Add more</button>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                </div>
                             </div>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <select class="form-control select2proppitch" type="text" name="prop_pitch_id[]" id="" required="">
+                                            <option value=""></option>
+                                            <?php foreach($dataproppitch as $key => $value){ ?>
+                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?> Degree</option>
+                                            <?php } ?>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Ampere Pulled">                                            
+                                            <span class="input-group-addon" id="basic-addon1">A</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger">Remove</button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

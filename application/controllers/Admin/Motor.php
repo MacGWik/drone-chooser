@@ -10,6 +10,7 @@ class Motor extends MY_Controller {
 		$this->load->model('motorsizemodel');
 		$this->load->model('motorkvmodel');
 		$this->load->model('propsizemodel');
+		$this->load->model('proppitchmodel');
 		$this->load->model('batterysizemodel');
 	}
 
@@ -38,6 +39,7 @@ class Motor extends MY_Controller {
 				$this->motormodel->Insert($post);
 				redirect('admin/motor');
 			}
+			$data['dataproppitch'] = $this->proppitchmodel->GetAllData();
 			$data['datamotorsize'] = $this->motorsizemodel->GetAllData();
 			$data['datapropsize'] = $this->propsizemodel->GetAllData();
 			$data['datamotorkv'] = $this->motorkvmodel->GetAllData();

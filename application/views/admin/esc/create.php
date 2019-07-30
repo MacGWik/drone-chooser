@@ -20,11 +20,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Ampere Rating</label>
-                                    <input class="form-control" type="text" name="ampere_rating" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="ampere_rating" required="">
+                                        <span class="input-group-addon" id="basic-addon1">A</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="note-label">A</label>
                             </div>
                         </div>
                     </div>

@@ -81,6 +81,10 @@
         $('.select2').select2({
           placeholder: "Select a Data"
         });
+
+        $('.select2proppitch').select2({
+          placeholder: "Prop Pitch"
+        })
       })
     </script>
 </body>

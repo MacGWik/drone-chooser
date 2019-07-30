@@ -14,11 +14,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Prop Size</label>
-                                    <input class="form-control" type="text" name="name" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="name" required="">
+                                        <span class="input-group-addon" id="basic-addon1">Inch</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">Inch</label>
                             </div>
                         </div>
                     </div>

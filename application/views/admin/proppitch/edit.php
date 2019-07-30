@@ -14,11 +14,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Prop Pitch</label>
-                                    <input class="form-control" type="text" name="name" value="<?= $dataproppitch->name ?>" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="name" value="<?= $dataproppitch->name ?>" required="">
+                                        <span class="input-group-addon" id="basic-addon1">Degree</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">Degree</label>
                             </div>
                         </div>
                     </div>

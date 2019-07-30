@@ -12,7 +12,7 @@
     <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Select2 CSS -->
     <link href="<?= base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css" rel="stylesheet">

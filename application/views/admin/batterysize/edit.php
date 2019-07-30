@@ -11,14 +11,14 @@
                 <div class="row" id="itemContainer">
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Battery Size</label>
-                                    <input class="form-control" type="text" name="name" value="<?= $databatterysize->name ?>" required="" >
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="name" value="<?= $databatterysize->name ?>" required="" >
+                                        <span class="input-group-addon" id="basic-addon1">S (Battery Cell Count)</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">S (Battery Cell Count)</label>
                             </div>
                         </div>
                     </div>
