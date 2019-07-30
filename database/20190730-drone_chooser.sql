@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2019 at 12:53 PM
+-- Generation Time: Jul 30, 2019 at 01:19 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admins`
 --
 
+DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,6 +50,7 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `deleted_at`, `created_
 -- Table structure for table `ampere_motors`
 --
 
+DROP TABLE IF EXISTS `ampere_motors`;
 CREATE TABLE `ampere_motors` (
   `id` int(10) UNSIGNED NOT NULL,
   `motor_varian_id` int(10) UNSIGNED NOT NULL,
@@ -66,6 +68,7 @@ CREATE TABLE `ampere_motors` (
 -- Table structure for table `battery_sizes`
 --
 
+DROP TABLE IF EXISTS `battery_sizes`;
 CREATE TABLE `battery_sizes` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -79,8 +82,8 @@ CREATE TABLE `battery_sizes` (
 --
 
 INSERT INTO `battery_sizes` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '4S', NULL, '2019-07-26 05:56:56', '2019-07-26 05:56:56'),
-(2, '6S', NULL, '2019-07-26 05:57:02', '2019-07-26 05:57:02');
+(1, '4', NULL, '2019-07-26 05:56:56', '2019-07-26 05:56:56'),
+(2, '6', NULL, '2019-07-26 05:57:02', '2019-07-26 05:57:02');
 
 -- --------------------------------------------------------
 
@@ -88,6 +91,7 @@ INSERT INTO `battery_sizes` (`id`, `name`, `deleted_at`, `created_at`, `updated_
 -- Table structure for table `cam_sizes`
 --
 
+DROP TABLE IF EXISTS `cam_sizes`;
 CREATE TABLE `cam_sizes` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -110,6 +114,7 @@ INSERT INTO `cam_sizes` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`)
 -- Table structure for table `escs`
 --
 
+DROP TABLE IF EXISTS `escs`;
 CREATE TABLE `escs` (
   `id` int(10) UNSIGNED NOT NULL,
   `esc_software_id` int(10) UNSIGNED NOT NULL,
@@ -128,6 +133,7 @@ CREATE TABLE `escs` (
 -- Table structure for table `esc_softwares`
 --
 
+DROP TABLE IF EXISTS `esc_softwares`;
 CREATE TABLE `esc_softwares` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -152,6 +158,7 @@ INSERT INTO `esc_softwares` (`id`, `name`, `deleted_at`, `created_at`, `updated_
 -- Table structure for table `fcs`
 --
 
+DROP TABLE IF EXISTS `fcs`;
 CREATE TABLE `fcs` (
   `id` int(10) UNSIGNED NOT NULL,
   `fc_software_id` int(10) UNSIGNED NOT NULL,
@@ -177,6 +184,7 @@ INSERT INTO `fcs` (`id`, `fc_software_id`, `esc_software_id`, `fc_mount_option_i
 -- Table structure for table `fc_mount_options`
 --
 
+DROP TABLE IF EXISTS `fc_mount_options`;
 CREATE TABLE `fc_mount_options` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -200,6 +208,7 @@ INSERT INTO `fc_mount_options` (`id`, `name`, `deleted_at`, `created_at`, `updat
 -- Table structure for table `fc_softwares`
 --
 
+DROP TABLE IF EXISTS `fc_softwares`;
 CREATE TABLE `fc_softwares` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -223,6 +232,7 @@ INSERT INTO `fc_softwares` (`id`, `name`, `deleted_at`, `created_at`, `updated_a
 -- Table structure for table `fpv_cams`
 --
 
+DROP TABLE IF EXISTS `fpv_cams`;
 CREATE TABLE `fpv_cams` (
   `id` int(10) UNSIGNED NOT NULL,
   `cam_size_id` int(10) UNSIGNED NOT NULL,
@@ -246,6 +256,7 @@ INSERT INTO `fpv_cams` (`id`, `cam_size_id`, `name`, `deleted_at`, `created_at`,
 -- Table structure for table `frames`
 --
 
+DROP TABLE IF EXISTS `frames`;
 CREATE TABLE `frames` (
   `id` int(10) UNSIGNED NOT NULL,
   `prop_size_id` int(10) UNSIGNED NOT NULL,
@@ -268,6 +279,7 @@ CREATE TABLE `frames` (
 -- Table structure for table `frame_types`
 --
 
+DROP TABLE IF EXISTS `frame_types`;
 CREATE TABLE `frame_types` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -291,6 +303,7 @@ INSERT INTO `frame_types` (`id`, `name`, `deleted_at`, `created_at`, `updated_at
 -- Table structure for table `migrations`
 --
 
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -330,6 +343,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `motors`
 --
 
+DROP TABLE IF EXISTS `motors`;
 CREATE TABLE `motors` (
   `id` int(10) UNSIGNED NOT NULL,
   `motor_size_id` int(10) UNSIGNED NOT NULL,
@@ -348,6 +362,7 @@ CREATE TABLE `motors` (
 -- Table structure for table `motor_kvs`
 --
 
+DROP TABLE IF EXISTS `motor_kvs`;
 CREATE TABLE `motor_kvs` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -370,6 +385,7 @@ INSERT INTO `motor_kvs` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`)
 -- Table structure for table `motor_sizes`
 --
 
+DROP TABLE IF EXISTS `motor_sizes`;
 CREATE TABLE `motor_sizes` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -392,6 +408,7 @@ INSERT INTO `motor_sizes` (`id`, `name`, `deleted_at`, `created_at`, `updated_at
 -- Table structure for table `motor_varians`
 --
 
+DROP TABLE IF EXISTS `motor_varians`;
 CREATE TABLE `motor_varians` (
   `id` int(10) UNSIGNED NOT NULL,
   `motor_id` int(10) UNSIGNED NOT NULL,
@@ -409,6 +426,7 @@ CREATE TABLE `motor_varians` (
 -- Table structure for table `password_resets`
 --
 
+DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -421,6 +439,7 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `props`
 --
 
+DROP TABLE IF EXISTS `props`;
 CREATE TABLE `props` (
   `id` int(10) UNSIGNED NOT NULL,
   `prop_size_id` int(10) UNSIGNED NOT NULL,
@@ -437,6 +456,7 @@ CREATE TABLE `props` (
 -- Table structure for table `prop_pitchs`
 --
 
+DROP TABLE IF EXISTS `prop_pitchs`;
 CREATE TABLE `prop_pitchs` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -462,6 +482,7 @@ INSERT INTO `prop_pitchs` (`id`, `name`, `deleted_at`, `created_at`, `updated_at
 -- Table structure for table `prop_sizes`
 --
 
+DROP TABLE IF EXISTS `prop_sizes`;
 CREATE TABLE `prop_sizes` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -485,6 +506,7 @@ INSERT INTO `prop_sizes` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -500,6 +522,7 @@ CREATE TABLE `users` (
 -- Table structure for table `vtxs`
 --
 
+DROP TABLE IF EXISTS `vtxs`;
 CREATE TABLE `vtxs` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
