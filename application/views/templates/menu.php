@@ -229,6 +229,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> Frame</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?= base_url() ?>admin/frame">List Frame</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>admin/frame/create">Create Frame</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-list fa-fw"></i> VTX</a>
                             <ul class="nav nav-second-level">
                                 <li>
