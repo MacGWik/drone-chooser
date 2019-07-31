@@ -17,7 +17,7 @@ class Login extends MY_Controller {
 		}
 		else
 		{
-			$data['redirect_to'] = "dashboard";
+			$data['redirect_to'] = "user/dashboard";
 		}
 		
 		$this->load->view('user/login/index',$data);

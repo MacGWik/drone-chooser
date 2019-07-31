@@ -11,9 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <?php if($this->session->userdata('class') == 'admin'){ ?>
-                <a class="navbar-brand" href="<?= base_url() ?>admin/dashboard">Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</a>
-                <?php } ?>
+                <a class="navbar-brand" href="<?= base_url() ?><?= $this->session->userdata('class') ?>/dashboard">Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -35,6 +33,17 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        <?php if($this->session->userdata('class') == 'user'){ ?>
+                        <li>
+                            <a href="<?= base_url() ?>user/dashboard"><i class="fa fa-list fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>user/build"><i class="fa fa-list fa-fw"></i> Daftar Rakitan Tersimpan</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>user/build/create"><i class="fa fa-list fa-fw"></i> Buat Rakitan</a>
+                        </li>
+                        <?php } ?>
                         <?php if($this->session->userdata('class') == 'admin'){ ?>
                         <li>
                             <a href="<?= base_url() ?>admin/dashboard"><i class="fa fa-list fa-fw"></i> Dashboard</a>
@@ -243,7 +252,7 @@
             $("#logout").unbind();
             $("#logout").click(function(){
                 $.displayConfirm("Yakin Ingin Logout ?",function(){
-                    window.location.href = "<?= site_url('login/logout') ?>";
+                    window.location.href = "<?= site_url('<?= $this->session->userdata("class") ?>/login/logout') ?>";
                 })
             })
         </script>

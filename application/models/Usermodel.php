@@ -12,11 +12,11 @@ class userModel extends CI_Model
 		parent::__construct();
 	}
 
-	function Insertuser($data)
+	function Insert($data,$password)
 	{
 		$this->db->set('name',$data['name']);
-		$this->db->set('email',$data['name']);
-		$this->db->set('password',$data['password']);
+		$this->db->set('email',$data['email']);
+		$this->db->set('password',$password);
 		$this->db->set('created_at',date('Y-m-d H:i:s'));
 		$this->db->set('updated_at',date('Y-m-d H:i:s'));
 
