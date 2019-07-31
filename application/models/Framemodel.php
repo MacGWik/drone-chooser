@@ -55,7 +55,11 @@ class FrameModel extends CI_Model
 							'batterymount' => array(
 													'1' => 'Top',
 													'2' => 'Bottom'
-													)
+													),
+							'batterymount_id' => array(
+														'1' => 'Atas Frame',
+														'2' => 'Bawah Frame'
+														)
 							);
 		return $staticVar[$id];
 	}

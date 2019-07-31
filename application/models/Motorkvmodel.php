@@ -48,11 +48,14 @@ class MotorkvModel extends CI_Model
 
 	function staticVar($id){
 		$staticVar = array(
-							'status_penggunaan' => array(
-													'1' => 'digunakan',
-													'2' => 'rusak',
-													'3' => 'tersedia'
-													)
+							'variant' => array(
+												'1' => 'Low KV',
+												'2' => 'High KV'
+												),
+							'variant_id' => array(
+												'1' => 'KV Rendah',
+												'2' => 'KV Tinggi'
+												)
 							);
 		return $staticVar[$id];
 	}
