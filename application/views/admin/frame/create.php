@@ -17,14 +17,14 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Size</label>
-                                    <input class="form-control" type="text" name="size" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="size" required="">
+                                        <span class="input-group-addon" id="basic-addon1">mm (diagonally Motor-to-Motor)</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">mm (diagonally Motor-to-Motor)</label>
                             </div>
                         </div>
                     </div>
@@ -33,11 +33,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Weight</label>
-                                    <input class="form-control" type="text" name="weight" required="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="weight" required="">
+                                        <span class="input-group-addon" id="basic-addon1">g</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4" >
-                                <label class="note-label">g</label>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             <select class="form-control select2" type="text" name="motor_size_id" required="">
                                 <option value=""></option>
                                 <?php foreach($datamotorsize as $key => $value){ ?>
-                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?> Degree</option>
+                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
