@@ -15,6 +15,7 @@ class Build extends MY_Controller {
 		$this->load->model('fcmodel');
 		$this->load->model('vtxmodel');
 		$this->load->model('propmodel');
+		$this->load->model('motormodel');
 	}
 
 	public function index()
@@ -118,9 +119,18 @@ class Build extends MY_Controller {
 		return $fpv_cam;
 	}
 
-	function choose_motor($motor_kv_id, $motor_size_id, $prop_size_id)
+	function choose_motor($motor_kv_id, $motor_size_id, $prop_size_id, $battery_size_id)
 	{
-
+		// $target_RPM = > 41000 for High KV
+		// $target_RPM = < 41000 for Low KV
+		// SELECT * from (
+			// SELECT a.*, b.name * c.name * 4.20 as RPM FROM `motors` a
+			// LEFT JOIN motor_kvs b ON a.motor_kv_id = b.id
+			// LEFT JOIN battery_sizes c ON a.battery_size_id = c.id
+			// WHERE a.`battery_size_id` = $battery_size_id 
+		// ) as d
+		// WHERE d.RPM $target_RPM AND d.motor_size_id = $motor_size_id AND d.prop_size_id = $prop_size_id
+		$motors = $ths->motormodel->GetDataByCondition();
 	}
 
 	function choose_prop($prop_size_id, $prop_pitch_id)
