@@ -41,11 +41,15 @@ class FrameModel extends CI_Model
 		
 		$this->db->where('purpouse',$data['purpouse']);
 
+		if($data['purpouse'] == 1){
+			$this->db->order_by('weight','asc'); //get the lightest frame for racing
+		}
+
 		$data = $this->db->get("frames")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data)){
+		if(isset($data->name)){
 			return $data;
 		}else{
 			return 0;

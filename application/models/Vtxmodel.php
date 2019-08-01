@@ -30,17 +30,19 @@ class VtxModel extends CI_Model
 		return $data;
 	}
 
-	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
-		$this->db->select('SUM(qty) as qty_sum');
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->where('status_penggunaan',$status_penggunaan);
+	function GetDataByCondition($data){
+		if($data['purpouse'] == 1){
+			$this->db->where('power_output','25');
+		}else{
+			$this->db->where('power_output >','25');
+		}
 
 		$data = $this->db->get("vtxs")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data->qty_sum)){
-			return $data->qty_sum;
+		if(isset($data->name)){
+			return $data;
 		}else{
 			return 0;
 		}

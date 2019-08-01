@@ -12,6 +12,9 @@ class Build extends MY_Controller {
 		$this->load->model('motorkvmodel');
 		$this->load->model('proppitchmodel');
 		$this->load->model('fcsoftwaremodel');
+		$this->load->model('fcmodel');
+		$this->load->model('vtxmodel');
+		$this->load->model('propmodel');
 	}
 
 	public function index()
@@ -46,6 +49,9 @@ class Build extends MY_Controller {
 		$post = $this->PopulatePost();
 		
 		$frame = $this->choose_frame($post['purpouse'], $post['batterymount'], $post['frame_type_id']);
+		$fc = $this->choose_fc($post['fc_software_id'], $frame->fc_mount_option_id);
+		$vtx = $this->choose_vtx($post['purpouse']);
+		$fpv_cam = $this->choose_fpv_cam($frame->cam_size_id);
 	}
 
 	function choose_frame($purpouse, $batterymount, $frame_type_id)
@@ -67,28 +73,49 @@ class Build extends MY_Controller {
 
 			if($result['frame'] == 0){
 				$data['purpouse'] = $purpouse;
+				$data['frame_type_id'] = $frame_type_id;
 				$result['frame'] = $this->framemodel->GetDataByCondition($data);
-				$result['reason'] = "Tujuan frame terpenuhi, namun posisi baterai dan tipe frame tidak dapat terpenuhi karena data frame tidak ditemukan dengan syarat tersebut";
+				$result['reason'] = "Tujuan frame terpenuhi, tipe frame pun terpenuhi, namun posisi baterai tidak dapat terpenuhi karena data frame tidak ditemukan dengan syarat tersebut";
+				
+				if($result['frame'] == 0){
+					$data['purpouse'] = $purpouse;
+					$result['frame'] = $this->framemodel->GetDataByCondition($data);
+					$result['reason'] = "Tujuan frame terpenuhi, namun posisi baterai dan tipe frame tidak dapat terpenuhi karena data frame tidak ditemukan dengan syarat tersebut";
+				}
 			}
 		}
-		
 		return $result;
-
 	}		
 
 	function choose_fc($fc_software_id, $fc_mount_option_id)
 	{
+		$data = array();
+		$data['fc_software_id'] = $fc_software_id;
+		$data['fc_mount_option_id'] = $fc_mount_option_id;
 
+		$fc = $this->fcmodel->GetDataByCondition($data);
+
+		return $fc;
 	}
 
 	function choose_vtx($purpouse)
 	{
+		$data = array();
+		$data['purpouse'] = $purpouse;
 
+		$vtx = $this->vtxmodel->GetDataByCondition($data);
+
+		return $vtx;
 	}
 
 	function choose_fpv_cam($cam_size_id)
 	{
+		$data = array();
+		$data['cam_size_id'] = $cam_size_id;
 
+		$fpv_cam = $this->fpvcammodel->GetDataByCondition($data);
+
+		return $fpv_cam;
 	}
 
 	function choose_motor($motor_kv_id, $motor_size_id, $prop_size_id)
