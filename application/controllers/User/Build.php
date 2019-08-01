@@ -40,4 +40,69 @@ class Build extends MY_Controller {
 
 		$this->load->view('user/build/create',$data);
 	}
+
+	function ajaxRequest()
+	{
+		$post = $this->PopulatePost();
+		
+		$frame = $this->choose_frame($post['purpouse'], $post['batterymount'], $post['frame_type_id']);
+	}
+
+	function choose_frame($purpouse, $batterymount, $frame_type_id)
+	{
+		$data = array();
+		$result = array();
+
+		$data['purpouse'] = $purpouse;
+		$data['battery_mount'] = $batterymount;
+		$data['frame_type_id'] = $frame_type_id;
+		$result['frame'] = $this->framemodel->GetDataByCondition($data);
+		$result['reason'] = "Semua syarat sesuai";
+
+		if($result['frame'] == 0){
+			$data['purpouse'] = $purpouse;
+			$data['battery_mount'] = $batterymount;
+			$result['frame'] = $this->framemodel->GetDataByCondition($data);
+			$result['reason'] = "Tujuan frame terpenuhi, posisi baterai pun terpenuhi, namun tipe frame tidak dapat terpenuhi karena data frame tidak ditemukan dengan syarat tersebut";
+
+			if($result['frame'] == 0){
+				$data['purpouse'] = $purpouse;
+				$result['frame'] = $this->framemodel->GetDataByCondition($data);
+				$result['reason'] = "Tujuan frame terpenuhi, namun posisi baterai dan tipe frame tidak dapat terpenuhi karena data frame tidak ditemukan dengan syarat tersebut";
+			}
+		}
+		
+		return $result;
+
+	}		
+
+	function choose_fc($fc_software_id, $fc_mount_option_id)
+	{
+
+	}
+
+	function choose_vtx($purpouse)
+	{
+
+	}
+
+	function choose_fpv_cam($cam_size_id)
+	{
+
+	}
+
+	function choose_motor($motor_kv_id, $motor_size_id, $prop_size_id)
+	{
+
+	}
+
+	function choose_prop($prop_size_id, $prop_pitch_id)
+	{
+
+	}
+
+	function choose_esc($motor_id, $prop_id, $fc_id)
+	{
+
+	}
 }

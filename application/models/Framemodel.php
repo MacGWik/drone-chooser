@@ -30,17 +30,23 @@ class FrameModel extends CI_Model
 		return $data;
 	}
 
-	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
-		$this->db->select('SUM(qty) as qty_sum');
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->where('status_penggunaan',$status_penggunaan);
+	function GetDataByCondition($data){
+		if(isset($data['frame_type_id'])){
+			$this->db->where('frame_type_id', $data['frame_type_id']);
+		}
+
+		if(isset($data['battery_mount'])){
+			$this->db->where('battery_mount',$data['battery_mount']);
+		}
+		
+		$this->db->where('purpouse',$data['purpouse']);
 
 		$data = $this->db->get("frames")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data->qty_sum)){
-			return $data->qty_sum;
+		if(isset($data)){
+			return $data;
 		}else{
 			return 0;
 		}

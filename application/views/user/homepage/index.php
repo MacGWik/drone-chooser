@@ -49,7 +49,7 @@
         </div>
         <div class="row" style="padding-top: 15%;">
             <div class="col-md-2 col-md-offset-3" style="padding-top:10px;">
-                <a href="<?= base_url(); ?>#" class="btn btn-primary btn-lg btn-block">Rakit Drone</a>
+                <a href="<?= base_url(); ?>user/build/create" class="btn btn-primary btn-lg btn-block">Rakit Drone</a>
             </div>
             <div class="col-md-2 " style="padding-top:10px;">
                 <a href="<?= base_url(); ?>user/register" class="btn btn-primary btn-lg btn-block">Daftar Akun</a>
