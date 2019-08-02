@@ -14,7 +14,7 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Prop Size</label>
-                                    <div>
+                                    <div class="input-group">
                                         <input class="form-control" type="text" name="name" value="<?= $datapropsize->name ?>" required="">
                                         <span class="input-group-addon" id="basic-addon1">Inch</span>
                                     </div>
