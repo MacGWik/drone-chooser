@@ -24,7 +24,7 @@ class Frame extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 
@@ -52,7 +52,7 @@ class Frame extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 
@@ -81,7 +81,7 @@ class Frame extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 

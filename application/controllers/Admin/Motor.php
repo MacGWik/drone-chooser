@@ -25,7 +25,7 @@ class Motor extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 
@@ -60,7 +60,7 @@ class Motor extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 
@@ -104,7 +104,7 @@ class Motor extends MY_Controller {
 		}
 		else
 		{
-			echo "MAU NGAPAIN BROH ?";
+			redirect(base_url());
 		}
 	}
 
