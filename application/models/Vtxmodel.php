@@ -31,11 +31,7 @@ class VtxModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
-		if($data['purpouse'] == 1){
-			$this->db->where('power_output','25');
-		}else{
-			$this->db->where('power_output >','25');
-		}
+		$this->db->where('power_output',$data['power_output']);
 
 		$data = $this->db->get("vtxs")->row();
 

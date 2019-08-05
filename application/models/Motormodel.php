@@ -31,11 +31,29 @@ class MotorModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
-		$this->db->where('cam_size_id',$data['cam_size_id']);
+		// $target_RPM = > 41000 for High KV
+		// $target_RPM = < 41000 for Low KV
+		// SELECT * from (
+			// SELECT a.*, b.name * c.name * 4.20 as RPM FROM `motors` a
+			// LEFT JOIN motor_kvs b ON a.motor_kv_id = b.id
+			// LEFT JOIN battery_sizes c ON a.battery_size_id = c.id
+			// WHERE a.`battery_size_id` = $battery_size_id 
+		// ) as d
+		// WHERE d.RPM $target_RPM AND d.motor_size_id = $motor_size_id AND d.prop_size_id = $prop_size_id
 
-		$data = $this->db->get("motors")->row();
+		$sql = "SELECT * from (
+					SELECT * from (
+						SELECT a.*, b.name * c.name * 4.20 as RPM FROM `motors` a
+						LEFT JOIN motor_kvs b ON a.motor_kv_id = b.id
+						LEFT JOIN battery_sizes c ON a.battery_size_id = c.id
+						WHERE a.`battery_size_id` = $battery_size_id 
+					) as d
+					WHERE d.RPM ".$data['target_RPM']." AND d.motor_size_id = ".$data['motor_size_id']." AND d.prop_size_id = ".$data['prop_size_id']." ORDER BY d.RPM ".$data['ordering'].$data['limit'].
+				") as e ORDER BY e.id RANDOM";
 
-		// print_r($this->db->last_query());die();
+		// $data = $this->db->get("motors")->row();
+
+		print_r($sql);die();
 
 		if(isset($data->name)){
 			return $data;

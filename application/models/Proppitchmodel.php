@@ -46,6 +46,19 @@ class ProppitchModel extends CI_Model
 		}
 	}
 
+	function GetDataNear($search,$order){
+		$this->db->where('name', $search);
+		$this->db->order_by('name', $order);
+
+		$data = $this->db->get("prop_pitchs")->row();
+
+		if(isset($data->id)){
+			return $data->id;
+		}else{
+			return 0;
+		}
+	}
+
 	function staticVar($id){
 		$staticVar = array(
 							'status_penggunaan' => array(

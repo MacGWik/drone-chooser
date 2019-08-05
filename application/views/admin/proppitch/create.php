@@ -14,10 +14,7 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Prop Pitch</label>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" name="name" required="">
-                                        <span class="input-group-addon" id="basic-addon1">Degree</span>
-                                    </div>
+                                    <input class="form-control" type="text" name="name" required="">
                                 </div>
                             </div>
                         </div>

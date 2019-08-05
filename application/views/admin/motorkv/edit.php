@@ -16,7 +16,7 @@
                                     <label>Motor KV</label>
                                     <div class="input-group">
                                         <input class="form-control" type="text" name="name" value="<?= $dataMotorKV->name ?>" required="">
-                                        <span class="input-group-addon" id="basic-addon1">S (Battery Cell Count)</span>
+                                        <span class="input-group-addon" id="basic-addon1">KV</span>
                                     </div>
                                 </div>
                             </div>

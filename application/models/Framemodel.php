@@ -31,11 +31,11 @@ class FrameModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
-		if(isset($data['frame_type_id'])){
+		if($data['frame_type_id'] != ""){
 			$this->db->where('frame_type_id', $data['frame_type_id']);
 		}
 
-		if(isset($data['battery_mount'])){
+		if($data['battery_mount'] != ""){
 			$this->db->where('battery_mount',$data['battery_mount']);
 		}
 		

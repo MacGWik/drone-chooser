@@ -53,8 +53,8 @@ class MotorkvModel extends CI_Model
 												'2' => 'High KV'
 												),
 							'variant_id' => array(
-												'1' => 'KV Rendah',
-												'2' => 'KV Tinggi'
+												'1' => 'RPM Rendah',
+												'2' => 'RPM Tinggi'
 												)
 							);
 		return $staticVar[$id];

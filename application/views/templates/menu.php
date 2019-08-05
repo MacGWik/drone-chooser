@@ -264,7 +264,7 @@
             $("#logout").unbind();
             $("#logout").click(function(){
                 $.displayConfirm("Yakin Ingin Logout ?",function(){
-                    window.location.href = "<?= site_url('<?= $this->session->userdata("class") ?>/login/logout') ?>";
+                    window.location.href = "<?= site_url($this->session->userdata('class').'/login/logout') ?>";
                 })
             })
         </script>

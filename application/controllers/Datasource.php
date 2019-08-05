@@ -283,11 +283,7 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                        if($c == "name")
-                        {
-                            $row[] = $aRow[$c]." Degree";
-                        }
-                        elseif($c == "updated_at") 
+                        if($c == "updated_at") 
                         {
                             $row[] = $aRow[$c];
                             $edit = '<a href="'.base_url().'admin/proppitch/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
@@ -517,10 +513,6 @@ class Datasource extends MY_Controller {
                     if($c == "prop_size")
                     {
                         $row[] = $aRow[$c]." Inch";
-                    }
-                    elseif($c == "prop_pitch")
-                    {
-                        $row[] = $aRow[$c]." Degree";
                     }
                     elseif($c == "updated_at") 
                     {

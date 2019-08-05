@@ -89,7 +89,7 @@
                                         <select class="form-control select2proppitch" type="text" name="prop_pitch_id[]" id="" required="">
                                             <option value=""></option>
                                             <?php foreach($dataproppitch as $key => $value){ ?>
-                                                <option value="<?= $value['id'] ?>" <?= ($valueAmpere['prop_pitch_id'] == $value['id'] ? 'selected' : '') ?> ><?= $value['name'] ?> Degree</option>
+                                                <option value="<?= $value['id'] ?>" <?= ($valueAmpere['prop_pitch_id'] == $value['id'] ? 'selected' : '') ?> ><?= $value['name'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </td>
@@ -120,7 +120,7 @@
                                 '<select class="form-control select2proppitch" type="text" name="prop_pitch_id[]" id="" required="">'+
                                     '<option value=""></option>'+
                                     '<?php foreach($dataproppitch as $key => $value){ ?>'+
-                                        '<option value="<?= $value["id"] ?>"><?= $value["name"] ?> Degree</option>'+
+                                        '<option value="<?= $value["id"] ?>"><?= $value["name"] ?></option>'+
                                     '<?php } ?>'+
                                 '</select>'+
                             '</td>'+

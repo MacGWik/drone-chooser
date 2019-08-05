@@ -125,9 +125,9 @@
                             <?php } ?>
                         </div>
                         <div class="form-group">
-                            <label>Berapa derajat kemiringan prop yang anda ingin gunakan ?</label><br/>
+                            <label>Berapa pitch prop yang anda ingin gunakan ?</label><br/>
                             <?php foreach($proppitch as $key => $value){ ?>
-                                <input type="radio" value="<?= $value['id'] ?>" name="prop_pitch_id"> <?= $value['name'] ?> derajat
+                                <input type="radio" value="<?= $value['id'] ?>" name="prop_pitch_id"> <?= $value['name'] ?> 
                             <?php } ?>
                         </div>
                         <div class="form-group">

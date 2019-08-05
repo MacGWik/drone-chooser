@@ -32,7 +32,7 @@
                             <select class="form-control select2" type="text" name="prop_pitch_id" required="">
                                 <option value=""></option>
                                 <?php foreach($dataproppitch as $key => $value){ ?>
-                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?> Degree</option>
+                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
