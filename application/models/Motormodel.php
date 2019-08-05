@@ -51,9 +51,9 @@ class MotorModel extends CI_Model
 					WHERE d.RPM ".$data['target_RPM']." AND d.motor_size_id = ".$data['motor_size_id']." AND d.prop_size_id = ".$data['prop_size_id']." ORDER BY d.RPM ".$data['ordering'].$data['limit'].
 				") as e ORDER BY e.id RANDOM";
 
-		// $data = $this->db->get("motors")->row();
+		$data = $this->db->query($sql)->row();
 
-		print_r($sql);die();
+		print_r($data);die();
 
 		if(isset($data->name)){
 			return $data;

@@ -248,8 +248,51 @@ class Build extends MY_Controller {
 		return $result;
 	}
 
-	function choose_esc($motor_id, $prop_pitch_id, $prop_size_id, $fc_id)
+	function choose_esc($motor_id, $prop_pitch_id, $esc_software_id)
 	{
+		$data = array();
+		$result = array();
 
+		$ampere_target = "";
+
+		$data['motor_id'] = $motor_id;
+		$data['prop_pitch_id'] = $prop_pitch_id;
+
+		$ampere_motor = $this->amperemotormodel->GetDataByCondition($data);
+
+		if($ampere_motor == 0){
+			$data['prop_pitch_id'] = "> ".$prop_pitch_id;
+			$ampere_motor_bigger = $this->amperemotormodel->GetDataByCondition($data);
+
+			$data['prop_pitch_id'] = "< ".$prop_pitch_id;
+			$ampere_motor_smaller = $this->amperemotormodel->GetDataByCondition($data);
+
+			if($ampere_motor_bigger == 0 && $ampere_motor_smaller != 0){
+				$ampere_target = "> ".$ampere_motor_smaller->ampere;
+			}elseif($ampere_motor_bigger != 0 && $ampere_motor_smaller == 0){
+				$ampere_target = "< ".$ampere_motor_smaller->ampere;
+			}elseif($ampere_motor_bigger == 0 && $ampere_motor_smaller == 0){
+				$ampere_target = "error";
+			}
+		}else{
+			$ampere_target = $ampere_motor->ampere;
+		}
+
+		if($ampere_target == "error"){
+			$result['esc'] = 0;
+			$result['reason'] = "Sistem belum memiliki cukup data untuk menentukan ESC mana yang cocok untuk rakitan anda.";
+		}else{
+			$dataSearchESC = array();
+
+			$dataSearchESC['ampere_rating'] = $ampere_target;
+			$dataSearchESC['esc_software_id'] = $esc_software_id;
+
+			$result['esc'] = $this->escmodel->GetDataByCondition($dataSearchESC);
+			$result['reason'] = "Sistem memilih ESC ".$result['esc']->name." karena dapat menerima aliran arus sebesar ".$result['esc']->ampere_rating."A yang diperkirakan akan ditarik oleh kombinasi motor dan prop yang akan digunakan";
+
+			if($result['esc'] == 0){
+				
+			}
+		}
 	}
 }

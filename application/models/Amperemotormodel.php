@@ -30,17 +30,16 @@ class Amperemotormodel extends CI_Model
 		return $data;
 	}
 
-	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
-		$this->db->select('SUM(qty) as qty_sum');
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->where('status_penggunaan',$status_penggunaan);
+	function GetDataByCondition($data){
+		$this->db->where('motor_id',$data['motor_id']);
+		$this->db->where('prop_pitch_id',$data['prop_pitch_id']);
 
 		$data = $this->db->get("ampere_motors")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data->qty_sum)){
-			return $data->qty_sum;
+		if(isset($data->ampere)){
+			return $data;
 		}else{
 			return 0;
 		}
