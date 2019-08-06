@@ -30,17 +30,19 @@ class EscModel extends CI_Model
 		return $data;
 	}
 
-	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
-		$this->db->select('SUM(qty) as qty_sum');
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->where('status_penggunaan',$status_penggunaan);
+	function GetDataByCondition($data){
+		$this->db->order_by('ampere_rating','desc');
+		$this->db->where('ampere_rating >=',$data['ampere_target_small']);
+		$this->db->where('ampere_rating <=',$data['ampere_target_big']);
+		$this->db->where('esc_software_id',$data['esc_software_id']);
+		
 
 		$data = $this->db->get("escs")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data->qty_sum)){
-			return $data->qty_sum;
+		if(isset($data->name)){
+			return $data;
 		}else{
 			return 0;
 		}

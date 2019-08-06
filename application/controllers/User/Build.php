@@ -72,27 +72,30 @@ class Build extends MY_Controller {
 		$frame_type = $this->frametypemodel->GetDataByID($frame_type_id);
 
 		$result['frame'] = $this->framemodel->GetDataByCondition($data);
-		
-		$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan tipe frame ".$frame_type->name." dan posisi baterai di ".$batterymount_id_text[$batterymount];
 
 		if($result['frame'] == 0){
 			$data['frame_type_id'] = "";
 			$result['frame'] = $this->framemodel->GetDataByCondition($data);
-			$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan posisi baterai di ".$batterymount_id_text[$batterymount]." namun bukan tipe frame ".$frame_type->name;
-
+			
 			if($result['frame'] == 0){
 				$data['battery_mount'] = "";
 				$data['frame_type_id'] = $frame_type_id;
 				$result['frame'] = $this->framemodel->GetDataByCondition($data);
-				$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan tipe frame ".$frame_type->name." namun tidak memiliki posisi baterai di ".$batterymount_id_text[$batterymount];
 				
 				if($result['frame'] == 0){
 					$data['battery_mount'] = "";
 					$data['frame_type_id'] = "";
 					$result['frame'] = $this->framemodel->GetDataByCondition($data);
 					$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." namun bukan tipe frame ".$frame_type->name." dan tidak memiliki posisi baterai di ".$batterymount_id_text[$batterymount];
+				}else{
+					$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan tipe frame ".$frame_type->name." namun tidak memiliki posisi baterai di ".$batterymount_id_text[$batterymount];
 				}
+			}else{
+				$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan posisi baterai di ".$batterymount_id_text[$batterymount]." namun bukan tipe frame ".$frame_type->name;
+
 			}
+		}else{
+			$result['reason'] = "Frame ".$result['frame']->name." ditujukan untuk ".$purpouse_text[$purpouse]." dengan tipe frame ".$frame_type->name." dan posisi baterai di ".$batterymount_id_text[$batterymount];
 		}
 		return $result;
 	}		
@@ -187,7 +190,6 @@ class Build extends MY_Controller {
 		$battery_size = $this->batterysizemodel->GetDataByID($battery_size_id);
 
 		$result['motor'] = $ths->motormodel->GetDataByCondition($data);
-		$result['reason'] = "Sistem memilih motor ".$result['motor']->name." karena memiliki ".$motor_kv_variant_text[$motor_kv_variant]." pada saat menggunakan baterai ".$battery_size->name."S";
 
 		if($result['motor'] == 0){
 			if($motor_kv_variant == 1){ //low kv jadi high karena gak ketemu
@@ -200,6 +202,8 @@ class Build extends MY_Controller {
 
 			$result['motor'] = $ths->motormodel->GetDataByCondition($data);
 			$result['reason'] = "Karena tidak menemukan motor ber-".$motor_kv_variant_text[$motor_kv_variant]." pada saat menggunakan baterai ".$battery_size->name."S, jadi Sistem memilih motor ".$result['motor']->name." dengan ".$motor_kv_variant_system_selected;
+		}else{
+			$result['reason'] = "Sistem memilih motor ".$result['motor']->name." karena memiliki ".$motor_kv_variant_text[$motor_kv_variant]." pada saat menggunakan baterai ".$battery_size->name."S";
 		}
 
 		return $result
@@ -216,7 +220,6 @@ class Build extends MY_Controller {
 		$prop_pitch = $this->proppitchmodel->GetDataByID($prop_pitch_id);
 	
 		$result['prop'] = $this->propmodel->GetDataByCondition($data);
-		$result['reason'] = "Sistem berhasil menemukan prop dengan pitch ".$prop_pitch->name." dan dapat digunakan pada frame ".$frame_name;
 
 		if($result['prop'] == 0){
 			if($purpouse == 1){ //racing
@@ -243,6 +246,8 @@ class Build extends MY_Controller {
 			}
 
 			$result['reason'] = "Sistem yang dapat digunakan pada frame ".$frame_name." namun dengan pitch yang berbeda dari yang diinginkan";
+		}else{
+			$result['reason'] = "Sistem berhasil menemukan prop dengan pitch ".$prop_pitch->name." dan dapat digunakan pada frame ".$frame_name;
 		}
 
 		return $result;
@@ -254,45 +259,55 @@ class Build extends MY_Controller {
 		$result = array();
 
 		$ampere_target = "";
+		$ampere_target_small = "";
+		$ampere_target_big = "";
 
 		$data['motor_id'] = $motor_id;
-		$data['prop_pitch_id'] = $prop_pitch_id;
+
+		$prop_pitch = $this->proppitchmodel->GetDataByID($prop_pitch_id);
+		$data['prop_pitch_name'] = $prop_pitch->name;
 
 		$ampere_motor = $this->amperemotormodel->GetDataByCondition($data);
 
 		if($ampere_motor == 0){
-			$data['prop_pitch_id'] = "> ".$prop_pitch_id;
+			$data['prop_pitch_name'] = "> ".$data['prop_pitch_name'];
 			$ampere_motor_bigger = $this->amperemotormodel->GetDataByCondition($data);
 
-			$data['prop_pitch_id'] = "< ".$prop_pitch_id;
+			$data['prop_pitch_name'] = "< ".$data['prop_pitch_name'];
 			$ampere_motor_smaller = $this->amperemotormodel->GetDataByCondition($data);
 
-			if($ampere_motor_bigger == 0 && $ampere_motor_smaller != 0){
-				$ampere_target = "> ".$ampere_motor_smaller->ampere;
-			}elseif($ampere_motor_bigger != 0 && $ampere_motor_smaller == 0){
-				$ampere_target = "< ".$ampere_motor_smaller->ampere;
-			}elseif($ampere_motor_bigger == 0 && $ampere_motor_smaller == 0){
-				$ampere_target = "error";
+			if($ampere_motor_bigger != 0 && $ampere_motor_smaller != 0){ //ketemu yang lebih gede dan lebih kecil pitch nya
+				$ampere_target = ($ampere_motor_smaller->ampere + $ampere_motor_bigger->ampere)/2 //ambil rata rata nya
+				$ampere_target_small = $ampere_target - 1; //kasih space lebih kecil kebawah 1 ampere
+				$ampere_target_big = $ampere_target + 5; //kasih space lebih besar keatas 5 ampere
+			}elseif($ampere_motor_bigger == 0 && $ampere_motor_smaller != 0){ //ketemu yang lebih gede pitch nya
+				$ampere_target_small = $ampere_motor_smaller->ampere;
+				$ampere_target_big = $ampere_motor_smaller->ampere + 6;
+			}elseif($ampere_motor_bigger != -1 && $ampere_motor_smaller == 0){ //ketemu yang lebih kecil pitch nya
+				$ampere_target_big = $ampere_motor_bigger->ampere;
+				$ampere_target_small = $ampere_motor_bigger->ampere - 6;
+			}elseif($ampere_motor_bigger == 0 && $ampere_motor_smaller == 0){ //gak ketemu sama sekali
 			}
 		}else{
 			$ampere_target = $ampere_motor->ampere;
+			$ampere_target_small = $ampere_target - 1; //kasih space lebih kecil kebawah 1 ampere
+			$ampere_target_big = $ampere_target + 5; //kasih space lebih besar keatas 5 ampere
 		}
 
-		if($ampere_target == "error"){
+		if($status == "error"){
 			$result['esc'] = 0;
 			$result['reason'] = "Sistem belum memiliki cukup data untuk menentukan ESC mana yang cocok untuk rakitan anda.";
 		}else{
 			$dataSearchESC = array();
 
-			$dataSearchESC['ampere_rating'] = $ampere_target;
+			$dataSearchESC['ampere_target_small'] = $ampere_target_small;
+			$dataSearchESC['ampere_target_big'] = $ampere_target_big;		
 			$dataSearchESC['esc_software_id'] = $esc_software_id;
 
 			$result['esc'] = $this->escmodel->GetDataByCondition($dataSearchESC);
 			$result['reason'] = "Sistem memilih ESC ".$result['esc']->name." karena dapat menerima aliran arus sebesar ".$result['esc']->ampere_rating."A yang diperkirakan akan ditarik oleh kombinasi motor dan prop yang akan digunakan";
-
-			if($result['esc'] == 0){
-				
-			}
 		}
+
+		return $result;
 	}
 }

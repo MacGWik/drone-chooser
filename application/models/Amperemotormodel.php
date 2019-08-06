@@ -32,9 +32,9 @@ class Amperemotormodel extends CI_Model
 
 	function GetDataByCondition($data){
 		$this->db->where('motor_id',$data['motor_id']);
-		$this->db->where('prop_pitch_id',$data['prop_pitch_id']);
+		$this->db->where('prop_pitch_name',$data['prop_pitch_name']);
 
-		$data = $this->db->get("ampere_motors")->row();
+		$data = $this->db->get("ampere_motors_prop_pitchs")->row();
 
 		// print_r($this->db->last_query());die();
 
