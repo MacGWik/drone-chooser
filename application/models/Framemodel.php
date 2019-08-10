@@ -31,6 +31,8 @@ class FrameModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
+		$this->db->order_by('rand()');
+		$this->db->where('deleted_at',null);
 		if($data['frame_type_id'] != ""){
 			$this->db->where('frame_type_id', $data['frame_type_id']);
 		}

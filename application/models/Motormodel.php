@@ -46,14 +46,19 @@ class MotorModel extends CI_Model
 						SELECT a.*, b.name * c.name * 4.20 as RPM FROM `motors` a
 						LEFT JOIN motor_kvs b ON a.motor_kv_id = b.id
 						LEFT JOIN battery_sizes c ON a.battery_size_id = c.id
-						WHERE a.`battery_size_id` = $battery_size_id 
+						WHERE a.`battery_size_id` = ".$data['battery_size_id']." 
 					) as d
-					WHERE d.RPM ".$data['target_RPM']." AND d.motor_size_id = ".$data['motor_size_id']." AND d.prop_size_id = ".$data['prop_size_id']." ORDER BY d.RPM ".$data['ordering'].$data['limit'].
-				") as e ORDER BY e.id RANDOM";
+					WHERE d.deleted_at IS NULL 
+					AND d.RPM ".$data['target_RPM'].
+					" AND d.motor_size_id = ".$data['motor_size_id'].
+					" AND d.prop_size_id = ".$data['prop_size_id'].
+					" ORDER BY d.RPM ".$data['ordering'].
+					" LIMIT ".$data['limit'].
+				") as e ORDER BY RAND()";
 
 		$data = $this->db->query($sql)->row();
 
-		print_r($data);die();
+		// print_r($sql);die();
 
 		if(isset($data->name)){
 			return $data;

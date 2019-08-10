@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label>Ampere Rating</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" name="ampere_rating" value="<?= $dataesc->name ?>" required="">
+                                        <input class="form-control" type="text" name="ampere_rating" value="<?= $dataesc->ampere_rating ?>" required="">
                                         <span class="input-group-addon" id="basic-addon1">A</span>
                                     </div>  
                                 </div>

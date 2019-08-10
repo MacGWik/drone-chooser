@@ -31,6 +31,8 @@ class FcModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
+		$this->db->order_by('rand()');
+		$this->db->where('deleted_at',null);
 		$this->db->where('fc_mount_option_id',$data['fc_mount_option_id']);
 		$this->db->where('fc_software_id',$data['fc_software_id']);
 

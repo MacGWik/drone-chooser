@@ -31,6 +31,7 @@ class FpvcamModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
+		$this->db->where('deleted_at',null);
 		$this->db->where('cam_size_id',$data['cam_size_id']);
 
 		$data = $this->db->get("fpv_cams")->row();

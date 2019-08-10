@@ -31,6 +31,7 @@ class Amperemotormodel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
+		$this->db->where('deleted_at',null);
 		$this->db->where('motor_id',$data['motor_id']);
 		$this->db->where('prop_pitch_name',$data['prop_pitch_name']);
 
