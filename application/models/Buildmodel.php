@@ -5,7 +5,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * 
 */
-class VtxModel extends CI_Model
+class BuildModel extends CI_Model
 {
 	function __construct()
 	{
@@ -16,7 +16,7 @@ class VtxModel extends CI_Model
 	function GetAllData(){
 		$this->db->where('deleted_at',null);
 
-		$data = $this->db->get("vtxs")->result_array();
+		$data = $this->db->get("builds")->result_array();
 
 		return $data;
 	}
@@ -25,27 +25,22 @@ class VtxModel extends CI_Model
 		$this->db->where('tipe_id',$tipe_id);
 		$this->db->order_by("barang_id",'desc');
 
-		$data = $this->db->get("vtxs")->row();
+		$data = $this->db->get("builds")->row();
 
 		return $data;
 	}
 
-	function GetDataByCondition($data){
-		$this->db->order_by('rand()');
-		$this->db->where('deleted_at',null);
+	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
+		$this->db->select('SUM(qty) as qty_sum');
+		$this->db->where('tipe_id',$tipe_id);
+		$this->db->where('status_penggunaan',$status_penggunaan);
 
-		if($data['purpouse'] == 1){ //racing
-			$this->db->where('power_output',"25");
-		}else if($data['purpouse'] == 2){ // freestyle
-			$this->db->where('power_output >',"25");
-		}
-
-		$data = $this->db->get("vtxs")->row();
+		$data = $this->db->get("builds")->row();
 
 		// print_r($this->db->last_query());die();
 
-		if(isset($data->name)){
-			return $data;
+		if(isset($data->qty_sum)){
+			return $data->qty_sum;
 		}else{
 			return 0;
 		}
@@ -61,41 +56,48 @@ class VtxModel extends CI_Model
 							);
 		return $staticVar[$id];
 	}
-	// "vtxs" = ;
+	// "builds" = ;
 	function GetDataByID($id){
 		$this->db->where('id',$id);
 		$this->db->where('deleted_at',NULL);
 
-		$data = $this->db->get("vtxs")->row();
+		$data = $this->db->get("builds")->row();
 
 		return $data;
 	}
 
 	function Insert($data){
-		$this->db->set('name',$data['name']);
-		$this->db->set('power_output',$data['power_output']);
+		$this->db->set('frame_id',$data['frame']['frame']->id);
+		$this->db->set('motor_id',$data['motor']['motor']->id);
+		$this->db->set('prop_id',$data['prop']['prop']->id);
+		$this->db->set('fpv_cam_id',$data['fpv_cam']['fpv_cam']->id);
+		$this->db->set('fc_id',$data['fc']['fc']->id);
+		$this->db->set('esc_id',$data['esc']['esc']->id);
+		$this->db->set('vtx_id',$data['vtx']['vtx']->id);
+
+		$this->db->set('battery_size_id',$data['battery_size']);
+
 		$this->db->set('created_at',date('Y-m-d H:i:s'));
 		$this->db->set('updated_at',date('Y-m-d H:i:s'));
-		$this->db->insert("vtxs");
+		$this->db->insert("builds");
 
 		$id = $this->db->insert_id();
 		return $id;
 	}
 
-	function Update($data){
-		$this->db->set('name',$data['name']);
-		$this->db->set('power_output',$data['power_output']);
+	function UpdateName($name,$id){
+		$this->db->set('name',$name);
 		$this->db->set('updated_at',date('Y-m-d H:i:s'));
 
-		$this->db->where('id',$data['id']);
+		$this->db->where('id',$id);
 
-		$this->db->update("vtxs");
+		$this->db->update("builds");
 	}
 
 	function Delete($id){
 		$this->db->where('id',$id);
 		$this->db->set('deleted_at',date('Y-m-d H:i:s'));
 
-		$this->db->update("vtxs");
+		$this->db->update("builds");
 	}
 }

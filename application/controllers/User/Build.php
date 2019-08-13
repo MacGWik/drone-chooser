@@ -19,6 +19,7 @@ class Build extends MY_Controller {
 		$this->load->model('motormodel');
 		$this->load->model('amperemotormodel');
 		$this->load->model('escmodel');
+		$this->load->model('buildmodel');
 	}
 
 	public function index()
@@ -84,7 +85,7 @@ class Build extends MY_Controller {
 			$result['message'] = "Frame tidak dapat ditemukan";
 		}
 			
-
+		$result['battery_size'] = $post['battery_size_id'];
 		$result['frame'] = $frame;
 		$result['fc'] = $fc;
 		$result['vtx'] = $vtx;
@@ -92,6 +93,10 @@ class Build extends MY_Controller {
 		$result['motor'] = $motor;
 		$result['prop'] = $prop;
 		$result['esc'] = $esc;
+
+		$result['build_id'] = $this->buildmodel->insert($result);
+
+		$this->buildmodel->UpdateName("Build #".$result['build_id'], $result['build_id']);
 
 		echo json_encode($result);
 	}

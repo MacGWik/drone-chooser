@@ -31,11 +31,9 @@ class EscModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
-		$this->db->where('deleted_at',null);
-		// $this->db->order_by('ampere_rating','desc');
 		$this->db->order_by('rand()');
+		$this->db->where('deleted_at',null);
 		$this->db->where('ampere_rating >=',$data['ampere_target_small']);
-		// $this->db->where('ampere_rating <=',$data['ampere_target_big']);
 		$this->db->where('battery_size_name_start <=',$data['battery_size_name']);
 		$this->db->where('battery_size_name_end >=',$data['battery_size_name']);
 		$this->db->where('esc_software_id',$data['esc_software_id']);

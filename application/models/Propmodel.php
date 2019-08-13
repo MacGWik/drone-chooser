@@ -31,6 +31,7 @@ class PropModel extends CI_Model
 	}
 
 	function GetDataByCondition($data){
+		$this->db->order_by('rand()');
 		$this->db->where('deleted_at',null);
 		$this->db->where('prop_pitch_id',$data['prop_pitch_id']);
 		$this->db->where('prop_size_id',$data['prop_size_id']);
