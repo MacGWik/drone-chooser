@@ -61,6 +61,6 @@ class Login extends MY_Controller {
 		
 		session_destroy();
 
-		redirect('admin/login');
+		redirect(base_url());
 	}
 }

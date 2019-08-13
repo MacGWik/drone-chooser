@@ -59,7 +59,6 @@ class BuildModel extends CI_Model
 	// "builds" = ;
 	function GetDataByID($id){
 		$this->db->where('id',$id);
-		$this->db->where('deleted_at',NULL);
 
 		$data = $this->db->get("builds")->row();
 
@@ -76,6 +75,8 @@ class BuildModel extends CI_Model
 		$this->db->set('vtx_id',$data['vtx']['vtx']->id);
 
 		$this->db->set('battery_size_id',$data['battery_size']);
+		$this->db->set('reason',$data['reason']);
+		$this->db->set('user_owner_id',$data['user_owner_id']);
 
 		$this->db->set('created_at',date('Y-m-d H:i:s'));
 		$this->db->set('updated_at',date('Y-m-d H:i:s'));

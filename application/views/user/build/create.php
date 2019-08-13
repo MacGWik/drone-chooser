@@ -45,6 +45,7 @@
 
     <script>
         var site_url = "<?= site_url(); ?>";
+        var class_user = "<?= $this->session->userdata('class') ?>";
     </script>
 </head>
 
@@ -65,6 +66,7 @@
             </div>
             <!-- /.navbar-header -->
 
+            <?php if($this->session->userdata('name')){ ?>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -79,13 +81,14 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+            <?php } ?>
         </nav>
     </div>
     <div id="page-wrapper" style="margin:0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Create Tipe</h1>
+                    <h1 class="page-header">Rakit Drone</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

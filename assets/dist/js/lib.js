@@ -137,3 +137,10 @@ function number_format (number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+
+$("#logout").unbind();
+  $("#logout").click(function(){
+      $.displayConfirm("Yakin Ingin Logout ?",function(){
+          window.location.href = site_url+class_user+"/login/logout";
+      })
+  })

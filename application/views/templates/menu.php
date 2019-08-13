@@ -15,6 +15,7 @@
             </div>
             <!-- /.navbar-header -->
 
+            <?php if($this->session->userdata('name')){ ?>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -29,6 +30,7 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+            <?php } ?>
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -261,10 +263,10 @@
         </nav>
 
         <script>
-            $("#logout").unbind();
-            $("#logout").click(function(){
-                $.displayConfirm("Yakin Ingin Logout ?",function(){
-                    window.location.href = "<?= site_url($this->session->userdata('class').'/login/logout') ?>";
-                })
-            })
+            // $("#logout").unbind();
+            // $("#logout").click(function(){
+            //     $.displayConfirm("Yakin Ingin Logout ?",function(){
+            //         window.location.href = "<?= site_url($this->session->userdata('class').'/login/logout') ?>";
+            //     })
+            // })
         </script>

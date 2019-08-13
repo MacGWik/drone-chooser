@@ -49,6 +49,30 @@ class Build extends MY_Controller {
 		$this->load->view('user/build/create',$data);
 	}
 
+	public function view($id)
+	{
+		$build = $this->buildmodel->GetDataByID($id);
+		
+		if(!isset($build->name))
+		{
+			redirect(base_url());
+		}
+
+		$data = array();
+		$data['batterysize'] = $this->batterysizemodel->GetDataByID($build->battery_size_id);
+		$data['frame'] = $this->framemodel->GetDataByID($build->frame_id);
+		$data['fc'] = $this->fcmodel->GetDataByID($build->fc_id);
+		$data['vtx'] = $this->vtxmodel->GetDataByID($build->vtx_id);
+		$data['fpvcam'] = $this->fpvcammodel->GetDataByID($build->fpv_cam_id);
+		$data['motor'] = $this->motormodel->GetDataByID($build->motor_id);
+		$data['prop'] = $this->propmodel->GetDataByID($build->prop_id);
+		$data['esc'] = $this->escmodel->GetDataByID($build->esc_id);
+		$data['reason'] = json_decode($build->reason);
+
+		print_r($data);die();
+		$this->load->view('user/build/view',$data);
+	}
+
 	function ajaxRequest()
 	{
 		$post = $this->PopulatePost();
@@ -93,6 +117,25 @@ class Build extends MY_Controller {
 		$result['motor'] = $motor;
 		$result['prop'] = $prop;
 		$result['esc'] = $esc;
+
+		// save the owner automatic when somebody login
+		if($this->session->userdata('id') != ""){
+			$result['user_owner_id'] = $this->session->userdata('id');
+		}else{
+			$result['user_owner_id'] = NULL;
+		}
+
+		// saving all reason
+		$reason = array();
+		$reason['frame'] = $frame['reason'];
+		$reason['fc'] = $fc['reason'];
+		$reason['vtx'] = $vtx['reason'];
+		$reason['fpv_cam'] = $fpv_cam['reason'];
+		$reason['motor'] = $motor['reason'];
+		$reason['prop'] = $prop['reason'];
+		$reason['esc'] = $esc['reason'];
+
+		$result['reason'] = json_encode($reason);
 
 		$result['build_id'] = $this->buildmodel->insert($result);
 

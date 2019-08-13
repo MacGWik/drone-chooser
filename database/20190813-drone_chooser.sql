@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2019 at 11:12 PM
+-- Generation Time: Aug 13, 2019 at 11:54 PM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -178,18 +178,18 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `battery_size_id` int(10) unsigned NOT NULL,
   `vtx_id` int(10) unsigned NOT NULL,
   `name` varchar(40) DEFAULT NULL,
+  `user_owner_id` bigint(20) unsigned DEFAULT NULL,
+  `reason` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `builds`
 --
 
-INSERT INTO `builds` (`id`, `frame_id`, `motor_id`, `prop_id`, `fpv_cam_id`, `fc_id`, `esc_id`, `battery_size_id`, `vtx_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 5, 1, 4, 1, 3, 2, 1, 1, 'Build #1', '2019-08-13 16:08:07', '2019-08-13 16:08:07'),
-(2, 5, 2, 4, 1, 5, 5, 1, 1, 'Build #2', '2019-08-13 16:09:38', '2019-08-13 16:09:39'),
-(3, 5, 4, 4, 1, 5, 7, 2, 1, 'Build #3', '2019-08-13 16:09:54', '2019-08-13 16:09:54');
+INSERT INTO `builds` (`id`, `frame_id`, `motor_id`, `prop_id`, `fpv_cam_id`, `fc_id`, `esc_id`, `battery_size_id`, `vtx_id`, `name`, `user_owner_id`, `reason`, `created_at`, `updated_at`) VALUES
+(6, 8, 13, 4, 3, 3, 2, 1, 1, 'Build #6', NULL, '{"frame":"Frame ALPHASQUAD Seeker ditujukan untuk Racing dengan posisi baterai di Atas Frame namun bukan tipe frame Pure X","fc":"Sistem memilih FC KISS V2 FC karena memiliki Software KISS dan kompatibel dengan frame ALPHASQUAD Seeker","vtx":"Sistem memilih VTX TBS Unify Race karena memiliki power output 25mW yang umum digunakan untuk Racing","fpv_cam":"Sistem memilih FPV Camera Foxeer Micro Arrow Pro karena kompatibel dengan frame ALPHASQUAD Seeker","motor":"Sistem memilih motor AMAXInno 2306 2500kv karena memiliki RPM Rendah pada saat menggunakan baterai 4S","prop":"Sistem berhasil menemukan prop dengan pitch 40 dan dapat digunakan pada frame ALPHASQUAD Seeker","esc":"Sistem memilih ESC KISS 32A ESC karena dapat menerima aliran arus sebesar 45A yang diperkirakan akan ditarik oleh kombinasi motor dan prop yang akan digunakan"}', '2019-08-13 16:48:43', '2019-08-13 16:48:44');
 
 -- --------------------------------------------------------
 
@@ -791,7 +791,7 @@ ALTER TABLE `battery_sizes`
 -- Indexes for table `builds`
 --
 ALTER TABLE `builds`
- ADD PRIMARY KEY (`id`), ADD KEY `builds_battery_size_id_foreign` (`battery_size_id`), ADD KEY `builds_frame_id_foreign` (`frame_id`), ADD KEY `builds_motor_id_foreign` (`motor_id`), ADD KEY `builds_prop_id_foreign` (`prop_id`), ADD KEY `builds_vtx_id_foreign` (`vtx_id`), ADD KEY `builds_esc_id_foreign` (`esc_id`), ADD KEY `builds_fc_id_foreign` (`fc_id`), ADD KEY `builds_fpv_cam_id_foreign` (`fpv_cam_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `builds_battery_size_id_foreign` (`battery_size_id`), ADD KEY `builds_frame_id_foreign` (`frame_id`), ADD KEY `builds_motor_id_foreign` (`motor_id`), ADD KEY `builds_prop_id_foreign` (`prop_id`), ADD KEY `builds_vtx_id_foreign` (`vtx_id`), ADD KEY `builds_esc_id_foreign` (`esc_id`), ADD KEY `builds_fc_id_foreign` (`fc_id`), ADD KEY `builds_fpv_cam_id_foreign` (`fpv_cam_id`), ADD KEY `user_owner_id` (`user_owner_id`);
 
 --
 -- Indexes for table `cam_sizes`
@@ -942,7 +942,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `builds`
 --
 ALTER TABLE `builds`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `cam_sizes`
 --
@@ -1065,7 +1065,8 @@ ADD CONSTRAINT `builds_fpv_cam_id_foreign` FOREIGN KEY (`fpv_cam_id`) REFERENCES
 ADD CONSTRAINT `builds_frame_id_foreign` FOREIGN KEY (`frame_id`) REFERENCES `frames` (`id`) ON DELETE CASCADE,
 ADD CONSTRAINT `builds_motor_id_foreign` FOREIGN KEY (`motor_id`) REFERENCES `motors` (`id`) ON DELETE CASCADE,
 ADD CONSTRAINT `builds_prop_id_foreign` FOREIGN KEY (`prop_id`) REFERENCES `props` (`id`) ON DELETE CASCADE,
-ADD CONSTRAINT `builds_vtx_id_foreign` FOREIGN KEY (`vtx_id`) REFERENCES `vtxs` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `builds_vtx_id_foreign` FOREIGN KEY (`vtx_id`) REFERENCES `vtxs` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `build_user_owner_id_foreign` FOREIGN KEY (`user_owner_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `escs`

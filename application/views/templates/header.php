@@ -45,5 +45,6 @@
 
     <script>
         var site_url = "<?= site_url(); ?>";
+        var class_user = "<?= $this->session->userdata('class') ?>";
     </script>
 </head>
