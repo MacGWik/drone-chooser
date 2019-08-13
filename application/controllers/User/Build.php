@@ -64,7 +64,7 @@ class Build extends MY_Controller {
 		$prop = "";
 		$esc = "";
 		
-		$frame = $this->choose_frame($post['purpouse'], $post['batterymount'], $post['frame_type_id']);
+		$frame = $this->choose_frame($post['purpouse'], $post['batterymount'], $post['frame_type_id'], $post['fc_software_id']);
 		
 		if(isset($frame['frame']->name)){
 			$fc = $this->choose_fc($post['fc_software_id'], $frame['frame']->fc_mount_option_id, $frame['frame']->name);
@@ -96,11 +96,12 @@ class Build extends MY_Controller {
 		echo json_encode($result);
 	}
 
-	function choose_frame($purpouse, $batterymount, $frame_type_id)
+	function choose_frame($purpouse, $batterymount, $frame_type_id, $fc_software_id)
 	{
 		$data = array();
 		$result = array();
 
+		$data['fc_mount_option_available'] = $this->fcmodel->GetAllFcMountOption($fc_software_id);
 		$data['purpouse'] = $purpouse;
 		$data['battery_mount'] = $batterymount;
 		$data['frame_type_id'] = $frame_type_id;

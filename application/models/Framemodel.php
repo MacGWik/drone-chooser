@@ -21,11 +21,10 @@ class FrameModel extends CI_Model
 		return $data;
 	}
 
-	function GetLatestDataByTipe($tipe_id){
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->order_by("barang_id",'desc');
+	function GetFrameByMountOption($fc_mount_option_available){
+		$this->db->where_in('fc_mount_option_id',$fc_mount_option_available);
 
-		$data = $this->db->get("frames")->row();
+		$data = $this->db->get("frames")->result_array();
 
 		return $data;
 	}
@@ -33,6 +32,7 @@ class FrameModel extends CI_Model
 	function GetDataByCondition($data){
 		$this->db->order_by('rand()');
 		$this->db->where('deleted_at',null);
+
 		if($data['frame_type_id'] != ""){
 			$this->db->where('frame_type_id', $data['frame_type_id']);
 		}
@@ -42,6 +42,7 @@ class FrameModel extends CI_Model
 		}
 		
 		$this->db->where('purpouse',$data['purpouse']);
+		$this->db->where_in('fc_mount_option_id',$data['fc_mount_option_available']);
 
 		if($data['purpouse'] == 1){
 			$this->db->order_by('weight','asc'); //get the lightest frame for racing

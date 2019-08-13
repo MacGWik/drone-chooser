@@ -21,13 +21,18 @@ class FcModel extends CI_Model
 		return $data;
 	}
 
-	function GetLatestDataByTipe($tipe_id){
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->order_by("barang_id",'desc');
+	function GetAllFcMountOption($fc_software_id){
+		$this->db->select('DISTINCT(fc_mount_option_id)');
+		$this->db->where('fc_software_id',$fc_software_id);
 
-		$data = $this->db->get("fcs")->row();
+		$data = $this->db->get("fcs")->result_array();
 
-		return $data;
+		$result = array();
+		foreach ($data as $key => $value) {
+			array_push($result, $value['fc_mount_option_id']);
+		}
+		
+		return $result;
 	}
 
 	function GetDataByCondition($data){
