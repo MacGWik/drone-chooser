@@ -46,7 +46,8 @@ class Build extends MY_Controller {
 		$data['proppitch'] = $this->proppitchmodel->GetAllData();
 		$data['fcsoftware'] = $this->fcsoftwaremodel->GetAllData();
 
-		$this->load->view('user/build/create',$data);
+		$data['main_content'] = 'user/build/create';
+		$this->load->view('templates/default',$data);
 	}
 
 	public function view($id)
@@ -59,18 +60,19 @@ class Build extends MY_Controller {
 		}
 
 		$data = array();
+		$data['build'] = $build;
 		$data['batterysize'] = $this->batterysizemodel->GetDataByID($build->battery_size_id);
 		$data['frame'] = $this->framemodel->GetDataByID($build->frame_id);
 		$data['fc'] = $this->fcmodel->GetDataByID($build->fc_id);
 		$data['vtx'] = $this->vtxmodel->GetDataByID($build->vtx_id);
-		$data['fpvcam'] = $this->fpvcammodel->GetDataByID($build->fpv_cam_id);
+		$data['fpv_cam'] = $this->fpvcammodel->GetDataByID($build->fpv_cam_id);
 		$data['motor'] = $this->motormodel->GetDataByID($build->motor_id);
 		$data['prop'] = $this->propmodel->GetDataByID($build->prop_id);
 		$data['esc'] = $this->escmodel->GetDataByID($build->esc_id);
 		$data['reason'] = json_decode($build->reason);
 
-		print_r($data);die();
-		$this->load->view('user/build/view',$data);
+		$data['main_content'] = 'user/build/view';
+		$this->load->view('templates/default',$data);
 	}
 
 	function ajaxRequest()
