@@ -89,14 +89,18 @@
                     fc_software_id:fc_software_idInput
                 },
                 function(result){
-                    // if(result.status == 'failed')
-                    // {
-                    //     $.displayError(result.message);
-                    // }else{                    
-                    //     $.displayInfo(result.message,function(){
-                    //         window.location.href = site_url+$("#redirect_to").val();
-                    //     });                        
-                    // }              
+                    if(result.status == 'failed')
+                    {
+                        $.displayError(result.message,function(){
+                            $.displayConfirm("Apakah anda tetap ingin melihat rakitan nya ?", function(){
+                                window.location.href = site_url+"user/build/view/"+result.build_id;
+                            })
+                        });
+                    }else{                    
+                        $.displayInfo(result.message,function(){
+                            window.location.href = site_url+"user/build/view/"+result.build_id;
+                        });                        
+                    }              
                 },
                 "json");
             }

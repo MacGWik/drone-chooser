@@ -20,6 +20,7 @@ class Build extends MY_Controller {
 		$this->load->model('amperemotormodel');
 		$this->load->model('escmodel');
 		$this->load->model('buildmodel');
+		$this->load->model('userbuildmodel');
 	}
 
 	public function index()
@@ -75,13 +76,49 @@ class Build extends MY_Controller {
 		$this->load->view('templates/default',$data);
 	}
 
+	function ajaxrequestView()
+	{
+		$post = $this->PopulatePost();
+		$post['user_owner_id'] = $this->session->userdata('id');
+
+		$result = array();
+
+		if($post['process'] == "getBuildName")
+		{
+			$dataBuild = $this->buildmodel->GetDataByID($post['id']);
+			
+			if(isset($dataBuild->name)){
+				$result['status'] = "success";
+				$result['build_name'] = $dataBuild->name;
+			}else{
+				$result['status'] = "error";
+			}
+
+			echo json_encode($result);
+		}
+		elseif($post['process'] == "setBuildName")
+		{
+			$dataBuild = $this->buildmodel->UpdateNameByID($post);	
+			$result['status'] = "success";
+			
+			echo json_encode($result);
+		}
+		elseif($post['process'] == "takeOwnership")
+		{
+			$dataBuild = $this->buildmodel->UpdateOwnerByID($post);	
+			$result['status'] = "success";
+			
+			echo json_encode($result);
+		}
+	}
+
 	function ajaxRequest()
 	{
 		$post = $this->PopulatePost();
 		$result = array();
 
 		$result['status'] = "success";
-		$result['message'] = "rakitan berhasil dirancang";
+		$result['message'] = "Rakitan Berhasil di Rancang !<br/>Mari lihat hasil rakitannya !";
 
 		$frame = "";
 		$fc = "";
@@ -121,7 +158,7 @@ class Build extends MY_Controller {
 		$result['esc'] = $esc;
 
 		// save the owner automatic when somebody login
-		if($this->session->userdata('id') != ""){
+		if($this->session->userdata('class') == "user" && $this->session->userdata('id') != ""){
 			$result['user_owner_id'] = $this->session->userdata('id');
 		}else{
 			$result['user_owner_id'] = NULL;
@@ -139,9 +176,22 @@ class Build extends MY_Controller {
 
 		$result['reason'] = json_encode($reason);
 
+		// save the build
 		$result['build_id'] = $this->buildmodel->insert($result);
 
-		$this->buildmodel->UpdateName("Build #".$result['build_id'], $result['build_id']);
+		// give the build name
+		$updateName = array();
+		$updateName['name'] = "Build #".$result['build_id'];
+		$updateName['id'] = $result['build_id'];
+		$this->buildmodel->UpdateNameByID($updateName);
+
+		// save the build to user automatic when somebody login
+		if($this->session->userdata('class') == "user" && $this->session->userdata('id') != ""){
+			$saveBuild = array();
+			$saveBuild['user_id'] = $result['user_owner_id'];
+			$saveBuild['build_id'] = $result['build_id'];
+			$this->userbuildmodel->insert($saveBuild);
+		}
 
 		echo json_encode($result);
 	}
@@ -353,14 +403,17 @@ class Build extends MY_Controller {
 
 		$prop_pitch = $this->proppitchmodel->GetDataByID($prop_pitch_id);
 		$data['prop_pitch_name'] = $prop_pitch->name;
+		$data['condition'] = "normal";
 
 		$ampere_motor = $this->amperemotormodel->GetDataByCondition($data);
 
 		if(!isset($ampere_motor->ampere)){
-			$data['prop_pitch_name'] = "> ".$data['prop_pitch_name'];
+			$data['prop_pitch_name'] = $data['prop_pitch_name'];
+			$data['condition'] = "bigger";
 			$ampere_motor_bigger = $this->amperemotormodel->GetDataByCondition($data);
 
-			$data['prop_pitch_name'] = "< ".$data['prop_pitch_name'];
+			$data['prop_pitch_name'] = $data['prop_pitch_name'];
+			$data['condition'] = "smaller";
 			$ampere_motor_smaller = $this->amperemotormodel->GetDataByCondition($data);
 
 			if(isset($ampere_motor_bigger->ampere)&& isset($ampere_motor_smaller->ampere)){ //ketemu yang lebih gede dan lebih kecil pitch nya
@@ -381,7 +434,9 @@ class Build extends MY_Controller {
 			$ampere_target_small = $ampere_target - 1; //kasih space lebih kecil kebawah 1 ampere
 			$ampere_target_big = $ampere_target + 5; //kasih space lebih besar keatas 5 ampere
 		}
-
+		// echo $motor_id;
+		// print_r($ampere_motor_bigger);
+		// print_r($ampere_motor_smaller);die();
 		if($status == "error"){
 			$result['esc'] = 0;
 			$result['reason'] = "Sistem belum memiliki cukup data untuk menentukan ESC mana yang cocok untuk rakitan anda.";

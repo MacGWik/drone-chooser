@@ -5,7 +5,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * 
 */
-class BuildModel extends CI_Model
+class Userbuildmodel extends CI_Model
 {
 	function __construct()
 	{
@@ -16,7 +16,7 @@ class BuildModel extends CI_Model
 	function GetAllData(){
 		$this->db->where('deleted_at',null);
 
-		$data = $this->db->get("builds")->result_array();
+		$data = $this->db->get("user_builds")->result_array();
 
 		return $data;
 	}
@@ -25,7 +25,7 @@ class BuildModel extends CI_Model
 		$this->db->where('tipe_id',$tipe_id);
 		$this->db->order_by("barang_id",'desc');
 
-		$data = $this->db->get("builds")->row();
+		$data = $this->db->get("user_builds")->row();
 
 		return $data;
 	}
@@ -35,7 +35,7 @@ class BuildModel extends CI_Model
 		$this->db->where('tipe_id',$tipe_id);
 		$this->db->where('status_penggunaan',$status_penggunaan);
 
-		$data = $this->db->get("builds")->row();
+		$data = $this->db->get("user_builds")->row();
 
 		// print_r($this->db->last_query());die();
 
@@ -56,31 +56,22 @@ class BuildModel extends CI_Model
 							);
 		return $staticVar[$id];
 	}
-	// "builds" = ;
+	// "user_builds" = ;
 	function GetDataByID($id){
 		$this->db->where('id',$id);
 
-		$data = $this->db->get("builds")->row();
+		$data = $this->db->get("user_builds")->row();
 
 		return $data;
 	}
 
 	function Insert($data){
-		$this->db->set('frame_id',$data['frame']['frame']->id);
-		$this->db->set('motor_id',$data['motor']['motor']->id);
-		$this->db->set('prop_id',$data['prop']['prop']->id);
-		$this->db->set('fpv_cam_id',$data['fpv_cam']['fpv_cam']->id);
-		$this->db->set('fc_id',$data['fc']['fc']->id);
-		$this->db->set('esc_id',$data['esc']['esc']->id);
-		$this->db->set('vtx_id',$data['vtx']['vtx']->id);
-
-		$this->db->set('battery_size_id',$data['battery_size']);
-		$this->db->set('reason',$data['reason']);
-		$this->db->set('user_owner_id',$data['user_owner_id']);
+		$this->db->set('user_id',$data['user_id']);
+		$this->db->set('build_id',$data['build_id']);
 
 		$this->db->set('created_at',date('Y-m-d H:i:s'));
 		$this->db->set('updated_at',date('Y-m-d H:i:s'));
-		$this->db->insert("builds");
+		$this->db->insert("user_builds");
 
 		$id = $this->db->insert_id();
 		return $id;
@@ -92,13 +83,13 @@ class BuildModel extends CI_Model
 
 		$this->db->where('id',$data['id']);
 
-		$this->db->update("builds");
+		$this->db->update("user_builds");
 	}
 
 	function UpdateOwnerByID($data){
 		$this->db->where('id',$data['id']);
 		$this->db->set('user_owner_id',$data['user_owner_id']);
 
-		$this->db->update("builds");
+		$this->db->update("user_builds");
 	}
 }

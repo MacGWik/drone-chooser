@@ -33,7 +33,19 @@ class Amperemotormodel extends CI_Model
 	function GetDataByCondition($data){
 		$this->db->where('deleted_at',null);
 		$this->db->where('motor_id',$data['motor_id']);
-		$this->db->where('prop_pitch_name',$data['prop_pitch_name']);
+
+		if($data['condition'] == "normal")
+		{
+			$this->db->where('prop_pitch_name',$data['prop_pitch_name']);
+		}
+		elseif($data['condition'] == "smaller")
+		{
+			$this->db->where('prop_pitch_name <',$data['prop_pitch_name']);
+		}
+		elseif($data['condition'] == "bigger")
+		{
+			$this->db->where('prop_pitch_name >',$data['prop_pitch_name']);
+		};
 
 		$data = $this->db->get("ampere_motors_prop_pitchs")->row();
 

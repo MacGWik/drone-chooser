@@ -182,3 +182,15 @@
 {
   padding-top:28px;
 }
+
+#btnEditName
+{
+  transition: 1s;
+  color: rgba(50,50,50,0.3);
+}
+
+#btnEditName:hover
+{
+  transition: 1s;
+  color: rgba(50,50,50,1);
+}

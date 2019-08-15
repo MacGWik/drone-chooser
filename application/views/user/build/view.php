@@ -1,7 +1,24 @@
     <div id="page-wrapper" style="<?= (($this->session->userdata('name')) ? "" : "margin:0px;") ?>" >
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h1 class="page-header">Hasil Rakitan Drone <span id="build_name"><?= $build->name; ?></span></h1>
+                    <h1 class="page-header">
+                        Hasil Rakitan Drone 
+                        <span id="build_name"><?= $build->name; ?></span>
+                        
+                        <?php if(is_null($build->user_owner_id) && $this->session->userdata('class') == "user"){ ?>
+                        <button type="button" class="btn btn-default" id="btnOwnership">Take Ownership of the Build</button>
+                        <?php } ?>
+
+                        <span style="font-size: 20px;display: none;" id="btnEditing">
+                            <i class="fa fa-times fa-fw" id="btnCancelName"></i>
+                            <i class="fa fa-check fa-fw" id="btnSaveName"></i>
+                        </span>
+                        <span style="font-size: 20px;">
+                            <i class="fa fa-pencil fa-fw" id="btnEditName" style="display: none;"></i>
+                        </span> 
+
+                        <input type="hidden" id="id_build" value="<?= $build->id ?>">
+                    </h1>
                 </div>
                 <!-- /.col-lg-10 col-lg-offset-1 -->
             </div>
@@ -12,8 +29,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">Jenis Komponen</th>
-                                <th style="text-align: center;">Komponen Terpilih</th>
+                                <th style="text-align: center;width: 10%;">Jenis Komponen</th>
+                                <th style="text-align: center;width: 15%;">Komponen Terpilih</th>
                                 <th style="text-align: center;">Alasan</th>
                             </tr>
                         </thead>
@@ -66,41 +83,123 @@
    
 
     <script>
-      $(document).ready(function(){
-        $('#btnBuild').click(function(){
-            var purpouseInput = $("input[name='purpouse']:checked").val();
-            var batterymountInput = $("input[name='batterymount']:checked").val();
-            var frame_type_idInput = $("input[name='frame_type_id']:checked").val();
-            var battery_size_idInput = $("input[name='battery_size_id']:checked").val();
-            var motor_kv_variantInput = $("input[name='motor_kv_variant']:checked").val();
-            var prop_pitch_idInput = $("input[name='prop_pitch_id']:checked").val();
-            var fc_software_idInput = $("input[name='fc_software_id']:checked").val();
+    function editing(){
+        $('#build_name').attr('contentEditable',true);
+        $('#build_name').focus();
+        $('#btnEditing').show();
+        $('#btnEditName').hide();
+    }
 
-            if(purpouseInput == undefined || batterymountInput == undefined || frame_type_idInput == undefined || battery_size_idInput == undefined || motor_kv_variantInput == undefined || prop_pitch_idInput == undefined || fc_software_idInput == undefined){
-                $.displayError("Harap Masukkan Semua Data Terlebih Dahulu !");
-            }else{
-                $.post("<?php echo site_url('user/build/ajaxrequest'); ?>",
-                { 
-                    purpouse:purpouseInput,
-                    batterymount:batterymountInput,
-                    frame_type_id:frame_type_idInput,
-                    battery_size_id:battery_size_idInput,
-                    motor_kv_variant:motor_kv_variantInput,
-                    prop_pitch_id:prop_pitch_idInput,
-                    fc_software_id:fc_software_idInput
-                },
-                function(result){
-                    // if(result.status == 'failed')
-                    // {
-                    //     $.displayError(result.message);
-                    // }else{                    
-                    //     $.displayInfo(result.message,function(){
-                    //         window.location.href = site_url+$("#redirect_to").val();
-                    //     });                        
-                    // }              
-                },
-                "json");
+    function reset_button(){
+        $('#build_name').attr('contentEditable',false);
+        $('#btnEditing').hide();
+        $('#btnEditName').show();
+    }
+
+    function hideTakeOwnership(){
+        $('#btnOwnership').hide();
+    }
+
+    function cancel(){
+        var build_id = $('#id_build').val();
+        
+        $.post("<?php echo site_url('user/build/ajaxrequestView'); ?>",
+        { 
+            process:"getBuildName",
+            id:build_id
+        },
+        function(result){
+            if(result.status == 'success')
+            {
+                $('#build_name').html(result.build_name);
+                reset_button();
             }
-        })
+            else
+            {
+                $.displayError('Error Happened !');
+            }                 
+        },
+        "json");
+    }
+
+    function save(){
+        var build_id = $('#id_build').val();
+        var build_name = $('#build_name').text();
+
+        if(build_name == "")
+        {
+            $.displayError('Nama Rakitan Tidak Boleh Kosong !', function(){
+                cancel();
+            });
+        }
+        else
+        {
+            $.post("<?php echo site_url('user/build/ajaxrequestView'); ?>",
+            { 
+                process:"setBuildName",
+                id:build_id,
+                name:build_name
+            },
+            function(result){
+                if(result.status == 'success')
+                {
+                    reset_button();
+                }
+                else
+                {
+                    $.displayError('Error Happened !');
+                }                 
+            },
+            "json");
+        }
+    }
+
+    function takeOwnership() {
+        var build_id = $('#id_build').val();
+
+        $.post("<?php echo site_url('user/build/ajaxrequestView'); ?>",
+        { 
+            process:"takeOwnership",
+            id:build_id
+        },
+        function(result){
+            if(result.status == 'success')
+            {
+                hideTakeOwnership();
+                reset_button();
+            }
+            else
+            {
+                $.displayError('Error Happened !');
+            }                 
+        },
+        "json");
+    }
+
+    $(document).ready(function(){
+        <?php if($this->session->userdata('id') == $build->user_owner_id && $this->session->userdata('class') == "user"){ ?>
+            reset_button();
+        <?php } ?>
+        $('#build_name').click(function(event){
+            editing();
+        });
+
+        $('#btnEditName').click(function(event) {
+            editing();
+        });
+
+        $('#btnCancelName').click(function(event) {
+            cancel();
+        });
+
+        $('#btnSaveName').click(function(event) {
+            save();
+        });
+
+        $('#btnOwnership').click(function(event) {
+            $.displayConfirm("Apakah Kamu Yakin ingin Mengambil Alih Kepemilikan Rakitan Ini ?",function(){
+                takeOwnership();
+            })
+        });
       })
     </script>
