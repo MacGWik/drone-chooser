@@ -53,8 +53,9 @@ class Build extends MY_Controller {
 
 	public function view($id)
 	{
+
 		$build = $this->buildmodel->GetDataByID($id);
-		
+	
 		if(!isset($build->name))
 		{
 			redirect(base_url());
@@ -72,6 +73,12 @@ class Build extends MY_Controller {
 		$data['esc'] = $this->escmodel->GetDataByID($build->esc_id);
 		$data['reason'] = json_decode($build->reason);
 
+
+		$searchLoved = array();
+		$searchLoved['build_id'] = $id;
+		$searchLoved['user_id'] = $this->session->userdata('id');
+		$data['userLoveBuild'] = $this->userbuildmodel->GetDataByIDandUserID($searchLoved);
+
 		$data['main_content'] = 'user/build/view';
 		$this->load->view('templates/default',$data);
 	}
@@ -80,6 +87,7 @@ class Build extends MY_Controller {
 	{
 		$post = $this->PopulatePost();
 		$post['user_owner_id'] = $this->session->userdata('id');
+		$post['user_id'] = $this->session->userdata('id');
 
 		$result = array();
 
@@ -107,6 +115,23 @@ class Build extends MY_Controller {
 		{
 			$dataBuild = $this->buildmodel->UpdateOwnerByID($post);	
 			$result['status'] = "success";
+			
+			echo json_encode($result);
+		}
+		elseif($post['process'] == "loveBuild")
+		{
+			$userLoveBuild = $this->userbuildmodel->GetDataByIDandUserID($post);
+
+			if($userLoveBuild == 1)
+			{
+				$this->userbuildmodel->delete($post);
+				$result['status'] = "not-loved";
+			}
+			else
+			{
+				$this->userbuildmodel->insert($post);
+				$result['status'] = "loved";
+			}
 			
 			echo json_encode($result);
 		}

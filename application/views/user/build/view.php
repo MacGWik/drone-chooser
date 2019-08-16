@@ -15,7 +15,10 @@
                         </span>
                         <span style="font-size: 20px;">
                             <i class="fa fa-pencil fa-fw" id="btnEditName" style="display: none;"></i>
-                        </span> 
+                        </span>
+                        <div style="font-size: 20px;margin-top: 15px;float: right;">
+                            <i class="fa <?= ($userLoveBuild == 1 ? "fa-heart" : "fa-heart-o") ?> fa-fw" id="btnLoveBuild" data-loved="<?= ($userLoveBuild == 1 ? "loved" : "not-loved") ?>" style="display: none;"></i>
+                        </div> 
 
                         <input type="hidden" id="id_build" value="<?= $build->id ?>">
                     </h1>
@@ -122,6 +125,31 @@
         "json");
     }
 
+    function loveBuild(){
+        var build_id = $('#id_build').val();
+
+        $.post("<?php echo site_url('user/build/ajaxrequestView'); ?>",
+        { 
+            process:"loveBuild",
+            build_id:build_id
+        },
+        function(result){
+            if(result.status == 'loved')
+            {
+                $('#btnLoveBuild').attr('data-loved','loved');
+                $('#btnLoveBuild').removeClass('fa-heart-o');
+                $('#btnLoveBuild').addClass('fa-heart');
+            }
+            else
+            {
+                $('#btnLoveBuild').attr('data-loved', 'not-loved');
+                $('#btnLoveBuild').removeClass('fa-heart');
+                $('#btnLoveBuild').addClass('fa-heart-o');
+            }                 
+        },
+        "json");
+    }
+
     function save(){
         var build_id = $('#id_build').val();
         var build_name = $('#build_name').text();
@@ -179,22 +207,40 @@
     $(document).ready(function(){
         <?php if($this->session->userdata('id') == $build->user_owner_id && $this->session->userdata('class') == "user"){ ?>
             reset_button();
+
+            $('#build_name').click(function(event){
+                editing();
+            });
+
+            $('#btnEditName').click(function(event) {
+                editing();
+            });
+
+            $('#btnCancelName').click(function(event) {
+                cancel();
+            });
+
+            $('#btnSaveName').click(function(event) {
+                save();
+            });
         <?php } ?>
-        $('#build_name').click(function(event){
-            editing();
-        });
 
-        $('#btnEditName').click(function(event) {
-            editing();
-        });
+        <?php if($this->session->userdata('id') != "" && $this->session->userdata('class') == "user"){ ?>
+            $('#btnLoveBuild').show();
 
-        $('#btnCancelName').click(function(event) {
-            cancel();
-        });
-
-        $('#btnSaveName').click(function(event) {
-            save();
-        });
+            $('#btnLoveBuild').click(function(event) {
+                var status = $(this).attr('data-loved');
+                
+                if(status == "loved")
+                {
+                    $.displayConfirm('Apa kamu yakin ingin menghapus rakitan ini dari rakitan yang disukai ?<br/>(aksi ini juga akan menghilangkan rakitan dari daftar rakitan tersimpan)',function(){
+                        loveBuild();
+                    });
+                }else{
+                    loveBuild();
+                }
+            });
+        <?php } ?>
 
         $('#btnOwnership').click(function(event) {
             $.displayConfirm("Apakah Kamu Yakin ingin Mengambil Alih Kepemilikan Rakitan Ini ?",function(){

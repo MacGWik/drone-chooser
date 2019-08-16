@@ -672,19 +672,20 @@ class Datasource extends MY_Controller {
         echo json_encode($output);
     }
 
-    function tipe()
+    function userbuild()
     { //print_r('expression');die();
         // $status_penggunaan = $this->barangmodel->staticVar('status_penggunaan');
 
-        $aColumns = array('id','tipe_nama');
+        $aColumns = array('id','build_id','build_name','user_name');
         $sIndexColumn = 'id';
-        $sTable = "tb_tipe";
-        $add_where = "status <> 9";
+        $sTable = "user_builds_builds_users";
+        $add_where = "user_id = ".$this->session->userdata('id');
         $data = $this->getdata($aColumns,$sIndexColumn,$sTable,$add_where);
         $output = $data['output'];
         $datares = $data['datares'];// print_r($datares);DIE();
         if(!empty($datares))
         {
+            $no = 1;
             foreach($datares->result_array() as $aRow)
             {
                 // if($aRow['delete_status'] == 0)
@@ -692,11 +693,19 @@ class Datasource extends MY_Controller {
                     $row = array();
                     foreach($aColumns as $c)
                     {
-                       if($c == "tipe_nama") 
+                        
+                        if($c == "id") 
+                        {
+                            $row[] = $no;
+                        }
+                        elseif($c == "build_id") 
+                        {
+                            // do nothing
+                        }
+                        elseif($c == "user_name") 
                         {
                             $row[] = $aRow[$c];
-                            $edit = '<a href="'.base_url().'tipe/edit/'.$aRow['id'].'" class="btn btn-primary">Edit</a>';
-                            $row[] = $edit.' <input type="button" class="btn btn-primary btnDelete" data="'.$aRow['id'].'" value="Delete">';
+                            $row[] = '<a href="'.base_url().'user/build/view/'.$aRow['build_id'].'" class="btn btn-primary">View</a>';
                         }
                         else
                         {
@@ -705,6 +714,7 @@ class Datasource extends MY_Controller {
                     }
                     $output['aaData'][] = $row;
                 // }
+                $no++;
             }
         }
         echo json_encode($output);

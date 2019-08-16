@@ -21,16 +21,21 @@ class Userbuildmodel extends CI_Model
 		return $data;
 	}
 
-	function GetLatestDataByTipe($tipe_id){
-		$this->db->where('tipe_id',$tipe_id);
-		$this->db->order_by("barang_id",'desc');
+	function GetDataByIDandUserID($data){
+		$this->db->where('deleted_at',null);
+		$this->db->where('build_id',$data['build_id']);
+		$this->db->where('user_id',$data['user_id']);
 
 		$data = $this->db->get("user_builds")->row();
 
-		return $data;
+		if(isset($data->id)){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 
-	function GetDataByStatusPenggunaan($tipe_id,$status_penggunaan){
+	function SearchLovedBuild($data){
 		$this->db->select('SUM(qty) as qty_sum');
 		$this->db->where('tipe_id',$tipe_id);
 		$this->db->where('status_penggunaan',$status_penggunaan);
@@ -77,19 +82,10 @@ class Userbuildmodel extends CI_Model
 		return $id;
 	}
 
-	function UpdateNameByID($data){
-		$this->db->set('name',$data['name']);
-		$this->db->set('updated_at',date('Y-m-d H:i:s'));
+	function Delete($data){
+		$this->db->where('build_id',$data['build_id']);
+		$this->db->where('user_id',$data['user_id']);
 
-		$this->db->where('id',$data['id']);
-
-		$this->db->update("user_builds");
-	}
-
-	function UpdateOwnerByID($data){
-		$this->db->where('id',$data['id']);
-		$this->db->set('user_owner_id',$data['user_owner_id']);
-
-		$this->db->update("user_builds");
+		$this->db->delete("user_builds");
 	}
 }
