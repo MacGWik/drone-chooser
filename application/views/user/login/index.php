@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone Rakitan</title>
 
      <!-- Bootstrap Core CSS -->
     <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="text-align: center;">
-                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone</h3>
+                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone Rakitan</h3>
             </div>
         </div>
         <div class="row">
@@ -63,7 +63,7 @@
                                     <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="button" class="btn btn-lg btn-success btn-block" value="Login" id="btnLogin">
+                                <input type="button" class="btn btn-lg btn-success btn-block" value="Masuk" id="btnLogin">
                             </fieldset>
                         </form>
                     </div>

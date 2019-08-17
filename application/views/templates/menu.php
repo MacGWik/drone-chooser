@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?= base_url() ?><?= $this->session->userdata('class') ?>/dashboard">Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</a>
+                <a class="navbar-brand" href="<?= base_url() ?><?= $this->session->userdata('class') ?>/dashboard">Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone Rakitan</a>
             </div>
             <!-- /.navbar-header -->
 

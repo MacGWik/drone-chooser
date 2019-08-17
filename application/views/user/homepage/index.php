@@ -43,7 +43,7 @@
     <div class="container-fluid">
         <div class="row" style="padding-top: 10%;">
             <div class="col-md-4 col-md-offset-4" style="text-align: center;">
-                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone</h3>
+                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone Rakitan</h3>
             </div>
             <div class="col-md-4"></div>
         </div>

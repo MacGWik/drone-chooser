@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone</title>
+    <title>Aplikasi Sistem Pakar Pemilihan Spesifikasi Drone Rakitan</title>
 
      <!-- Bootstrap Core CSS -->
     <link href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="text-align: center;">
-                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone</h3>
+                <h3>Aplikasi Sistem Pakar<br/>Pemilihan Spesifikasi Drone Rakitan</h3>
             </div>
         </div>
         <div class="row">
